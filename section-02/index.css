@@ -1,23 +1,41 @@
 /* cascading style sheets */
+
 /* type selectors */
+body {
+  text-align: center;   
+  background-color: rgb(233, 215, 207);
+  margin: 50px;
+}
+/*
+<img> element is void so to center the image
+we can center its parent <body>
+*/
+img {
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+}
+
 h1 {
   font-family: "Oswald", sans-serif;
-  text-align: center;
   color: rgb(216, 68, 68);
 }
+
 p {
   font-family: "Fira Sans", sans-serif;
-  text-align: center;
   color: rgb(230, 181, 92);
 }
+
 a {
   color: rgb(167, 1, 78);
   text-decoration: none;
 }
+
 /* pseudo selectors */
 a:hover {
   text-decoration: underline;
 }
+
 /* id selectors */
 #first-paragraph {
   color: rgb(170, 96, 83);
