@@ -2,8 +2,6 @@
 
 /* type selectors */
 body {
-  text-align: center;   
-  background-color: rgb(233, 215, 207);
   margin: 50px;
 }
 /*
@@ -16,25 +14,10 @@ img {
   border-radius: 100px;
 }
 
-h1 {
-  font-family: "Oswald", sans-serif;
-  color: rgb(216, 68, 68);
-}
-
-p {
-  font-family: "Fira Sans", sans-serif;
-  color: rgb(230, 181, 92);
-}
-
-a {
-  color: rgb(167, 1, 78);
-  text-decoration: none;
-}
-
 /* pseudo selectors */
-a:hover {
+/* a:hover {
   text-decoration: underline;
-}
+} */
 
 /* id selectors */
 #first-paragraph {
