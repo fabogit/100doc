@@ -5,11 +5,11 @@ header {
 h1 {
   font-size: 48px;
   color: rgb(71, 62, 62);
-  margin: 12px 0;
+  margin: 12px;
 }
 
 #description {
-  margin-bottom: 36px;
+  margin-bottom: 12px 0px;
 }
 
 /* header p {
@@ -17,11 +17,13 @@ h1 {
 } */
 
 a {
-  padding: 12px 48px;
+  padding: 0px 48px;
   background-color: rgb(167, 1, 78);
   color: white;
   border-radius: 4px;
   font-size: 24px;
+  display: inline-block;
+  margin: 0;
 }
 
 a:hover {
@@ -38,6 +40,7 @@ ol {
 
 li {
   padding: 16px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
   margin: 32px;
   background-color: rgb(223, 136, 124);
   border-radius: 6px;
