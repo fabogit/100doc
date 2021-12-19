@@ -5,15 +5,15 @@ body {
 }
 
 h1 {
-  font-family: "Oswald", sans-serif;
+  font-family: 'Oswald', sans-serif;
 }
 
 p {
-  font-family: "Fira Sans", sans-serif;
+  font-family: 'Fira Sans', sans-serif;
 }
 
 a {
-  font-family: "Fira Sans", sans-serif;
+  font-family: 'Fira Sans', sans-serif;
   text-decoration: none;
   color: rgb(167, 1, 78);
   font-style: italic;
