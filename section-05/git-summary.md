@@ -22,9 +22,9 @@ reset unstaged changes (`filename` fo single file or `.` for all)
 
 `git reset <filename>` && `git checkout -- <filename>`
 
-save unstaged changes
+save unstaged changes (title and description)
 
-`git commit -m "Title" -m "Description .........."`
+`git commit -m "<Main Summary>" -m "<Description>"`
 
 push to remote repo
 
