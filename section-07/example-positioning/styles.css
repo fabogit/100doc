@@ -22,8 +22,12 @@ p {
   background-color: #943092;
 }
 
+/* position move the element
+ 20px from the top margin*/
 #two {
   background-color: #c95bc7;
+  position: relative;
+  top: 20px;
 }
 
 #three {
