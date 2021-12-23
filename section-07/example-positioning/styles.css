@@ -12,24 +12,37 @@ p {
 
 #container {
   background-color: #521751;
+  position: relative;
 }
 
 #container p {
   color: white;
 }
 
+/*  element is fixed 
+relative to viewport */
 #one {
-  background-color: #943092;
+  background-color: red;
+  position: fixed;
+  top: 200px;
 }
 
 /* position move the element
  20px from the top margin*/
 #two {
-  background-color: #c95bc7;
+  background-color: blue;
   position: relative;
   top: 20px;
 }
 
+/* absolute put element 
+out of the document flow */
 #three {
-  background-color: #dd61db;
+  background-color: orange;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 10px solid black;
 }
