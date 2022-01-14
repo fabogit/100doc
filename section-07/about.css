@@ -1,0 +1,105 @@
+body {
+  background: linear-gradient(70deg, rgb(147, 224, 164), orange);
+  color: rgb(64, 97, 228);
+  margin: 0px;
+}
+
+#page-logo a {
+  color: rgb(224, 61, 11);
+}
+
+header a {
+  color: rgb(224, 61, 11);
+}
+
+header nav a:hover {
+  background-color: rgb(230, 203, 47);
+  color: rgb(59, 59, 59);
+}
+
+#about-title2 {
+  font-style: italic;
+  font-size: 205%;
+}
+
+main h2 {
+  text-align: center;
+  color: rgb(224, 61, 11);
+  text-shadow: 2px 2px 2px black;
+}
+
+main ul {
+  margin: 0 auto 48px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 20px;
+}
+
+main li {
+  display: flex;
+  background-color: rgb(228, 176, 64);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+main li img {
+  width: 300px;
+  margin: auto;
+}
+
+#section-number1 {
+  height: 800px;
+  background-image: url("/images/about/travel.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+#about-content {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: orange;
+  font-size: 22px;
+  border-radius: 12px;
+}
+
+#hero-content {
+  width: auto;
+  border-radius: 8px;
+  text-align: center;
+  padding: 50px 0;
+  margin: 5%;
+
+}
+
+#hero-content img {
+  width: 30%;
+  object-fit: cover;
+  margin: auto;
+  border-radius: 6px;
+}
+
+#section-number2 {
+  font-size: 20px;
+}
+
+#continents {
+  text-align: center;
+}
+
+#continents-item {
+  text-align: center;
+  padding: 5%;
+}
+#section-number2 ul {
+  padding: 5%;
+  margin: 5%;
+}
+
+#section-number2 h2 {
+  font-size: 40px;
+}
+
+.continents-item img {
+  padding: 5%;
+  width: 100%;
+}
