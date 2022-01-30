@@ -1,3 +1,15 @@
+# GIT CONFIG
+
+https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration
+
+`git config --global user.name "JOHN DOE"` && `git config --global user.email EMAIL@EXAMPLE.com`
+
+change commit editor
+
+`git config --global core.editor "EDITOR"`
+
+# LOCAL REPO
+
 init local repo
 
 `git init`
@@ -14,6 +26,10 @@ repo log
 
 `git log`
 
+clone remote repo
+
+`git clone <repourl>`
+
 add new files and unstaged changes
 
 `git add <filetoadd>` to add all `git add .`
@@ -26,18 +42,6 @@ save unstaged changes (title and description)
 
 `git commit -m "<Main Summary>" -m "<Description>"`
 
-push to remote repo
-
-`git push`
-
-fetch from remote repo
-
-`git pull`
-
-jump back of 1 commit
-
-`git reset -hard HEAD~1`
-
 edit last commit message
 
 `git commit --amend` or `git commit --amend -m "New commit message."`
@@ -46,6 +50,24 @@ If already pushed the commit to remote repo,
 force push a commit with an amended message.
 
 `push --force-with-lease` or  `git push --force <remoteName> <branchName>`
+
+# REMOTE
+
+push to remote repo
+
+`git push`
+
+fetch from remote repo
+
+`git pull`
+
+push local repo on remote
+
+`git remote add origin <repo url>` && `git push -u origin main`
+
+jump back of 1 commit
+
+`git reset -hard HEAD~1`
 
 show branches
 
@@ -70,11 +92,3 @@ reset branch to latest commit
 delete branch, (checkout from branch to delete if in it)
 
 `git branch -D <branch>`
-
-clone remote repo
-
-`git clone <repourl>`
-
-push local repo on remote
-
-`git remote add origin <repo url>` && `git push -u origin main`
