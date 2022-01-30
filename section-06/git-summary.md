@@ -26,10 +26,6 @@ repo log
 
 `git log`
 
-clone remote repo
-
-`git clone <repourl>`
-
 add new files and unstaged changes
 
 `git add <filetoadd>` to add all `git add .`
@@ -53,6 +49,14 @@ force push a commit with an amended message.
 
 # REMOTE
 
+clone remote repo
+
+`git clone <repourl>`
+
+push local repo on remote
+
+`git remote add origin <repo url>` && `git push -u origin main`
+
 push to remote repo
 
 `git push`
@@ -60,10 +64,6 @@ push to remote repo
 fetch from remote repo
 
 `git pull`
-
-push local repo on remote
-
-`git remote add origin <repo url>` && `git push -u origin main`
 
 jump back of 1 commit
 
