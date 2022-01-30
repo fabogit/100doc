@@ -18,13 +18,27 @@
     <label for="user-name-id">Your name</label>
     <input type="text" name="user-name" id="user-name-id" />
     <label for="user-email-id">Your email adress</label>
-    <input type="email" name="user-email" id="user-email-id">
+    <input type="email" name="user-email" id="user-email-id" />
     <label for="user-age-id">Your age</label>
-    <input type="number" name="user-age" id="user-age-id" step="1">
+    <input type="number" name="user-age" id="user-age-id" step="1" />
     <label for="user-password-id">Your password</label>
-    <input type="password" name="user-password" id="user-password-id">
+    <input type="password" name="user-password" id="user-password-id" />
     <label for="user-birthdate-id">Your birthdate</label>
-    <input type="date" name="user-birthdate" id="user-birthdate-id">
+    <input type="date" name="user-birthdate" id="user-birthdate-id" />
+    <hr>
+    <h2>How should we verify your account?</h2>
+    <div class="form-control-inline">
+      <input type="radio" name="verify" id="verify-text-message" value="sms" />
+      <label for="verify-text-message">Via text message (SMS)</label>
+    </div>
+    <div class="form-control-inline">
+      <input type="radio" name="verify" id="verify-phone" value="phone" />
+      <label for="verify-phone">Via a phone call</label>
+    </div>
+    <div class="form-control-inline">
+      <input type="radio" name="verify" id="verify-email" value="email" />
+      <label for="verify-email">Via an email</label>
+    </div>
     <button>Submit</button>
   </form>
 </body>
