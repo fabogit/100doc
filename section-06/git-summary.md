@@ -38,6 +38,15 @@ jump back of 1 commit
 
 `git reset -hard HEAD~1`
 
+edit last commit message
+
+`git commit --amend` or `git commit --amend -m "New commit message."`
+
+If already pushed the commit to remote repo,
+force push a commit with an amended message.
+
+`push --force-with-lease` or  `git push --force <remoteName> <branchName>`
+
 show branches
 
 `git branch`
