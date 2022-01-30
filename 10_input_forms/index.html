@@ -24,16 +24,18 @@
         <ul>
           <li>
             <label for="user-name-id">Your name</label>
-            <input type="text" name="user-name" id="user-name-id" required />
+            <input type="text" name="user-name" id="user-name-id" required
+              placeholder="Name Surname" />
           </li>
           <li>
             <label for="user-email-id">Your email adress</label>
-            <input type="email" name="user-email" id="user-email-id" required />
+            <input type="email" name="user-email" id="user-email-id" required
+              placeholder="your@email.com" />
           </li>
           <li>
             <label for="user-password-id">Your password</label>
             <input type="password" name="user-password" id="user-password-id"
-              required minlength="7" />
+              required minlength="7" placeholder="At least 7 chars" />
           </li>
         </ul>
       </section>
@@ -43,7 +45,7 @@
           <li>
             <label for="user-age-id">Your age</label>
             <input type="number" name="user-age" id="user-age-id" step="1"
-              required min="18" max="150" />
+              required min="18" max="150" placeholder="Min 18, max 150" />
           </li>
           <li>
             <label for="user-birthdate-id">Your birthdate</label>
@@ -62,7 +64,8 @@
       </section>
       <section>
         <label for="user-message-id">Your message</label>
-        <textarea name="user-message" id="user-message-id"></textarea>
+        <textarea name="user-message" id="user-message-id" rows="6"
+          placeholder="Write your message here"></textarea>
       </section>
       <section>
         <h2>How should we verify your account?</h2>
