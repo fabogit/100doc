@@ -13,31 +13,32 @@
     <h1>Contact Us</h1>
   </header>
   <main>
-    <form action="">
+    <form action="/challenge" method="GET">
       <section>
         <h2>How can we help you?</h2>
         <ul>
           <li>
             <label for="id-username">Your Name</label>
-            <input type="text" name="username" id="id-username">
+            <input type="text" name="username" id="id-username" required>
           </li>
           <li>
             <label for="id-email">Your E-Mail Adress</label>
-            <input type="email" name="email" id="id-email">
+            <input type="email" name="email" id="id-email" required>
           </li>
           <li>
             <label for="id-phone">Your Phone Number</label>
-            <input type="tel" name="phone" id="id-phone">
+            <input type="tel" name="phone" id="id-phone" required minlength="5">
           </li>
           <li>
             <label for="id-message">Your Message</label>
-            <textarea name="message" id="id-message"></textarea>
+            <textarea name="message" id="id-message" required minlength="10"
+              maxlength="200"></textarea>
           </li>
         </ul>
       </section>
       <section>
         <label for="id-channel">How did you find us?</label>
-        <select name="channel" id="id-channell">
+        <select name="channel" id="id-channell" required>
           <option value="search">Web Search</option>
           <option value="word-of-mouth">Word of Mouth</option>
           <option value="other">Other</option>
@@ -47,21 +48,25 @@
         <h2>How should we reply?</h2>
         <ul>
           <li>
-            <input type="radio" name="reply" id="reply-phone" value="phone">
+            <input type="radio" name="reply" id="reply-phone" value="phone"
+              required>
             <label for="reply-phone">Call me</label>
           </li>
           <li>
-            <input type="radio" name="reply" id="reply-email" value="email">
+            <input type="radio" name="reply" id="reply-email" value="email"
+              required>
             <label for="reply-email">Send me an email</label>
           </li>
           <li>
-            <input type="radio" name="reply" id="reply-none" value="none">
+            <input type="radio" name="reply" id="reply-none" value="none"
+              required>
             <label for="reply-none">Don't reply</label>
           </li>
         </ul>
       </section>
       <section>
-        <input type="checkbox" name="accept-terms" id="id-accept-terms">
+        <input type="checkbox" name="accept-terms" id="id-accept-terms"
+          required>
         <label for="id-accept-terms">Accept Terms</label>
       </section>
       <section>
