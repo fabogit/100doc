@@ -14,7 +14,35 @@
   </header>
   <main>
     <form action="">
-      Form
+      <section>
+        <h2>How can we help you?</h2>
+        <ul>
+          <li>
+            <label for="id-username">Your Name</label>
+            <input type="text" name="username" id="id-username">
+          </li>
+          <li>
+            <label for="id-email">Your E-Mail Adress</label>
+            <input type="email" name="email" id="id-email">
+          </li>
+          <li>
+            <label for="id-phone">Your Phone Number</label>
+            <input type="tel" name="phone" id="id-phone">
+          </li>
+          <li>
+            <label for="id-message">Your Message</label>
+            <textarea name="message" id="id-message"></textarea>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <label for="channel">How did you find us?</label>
+        <select name="channel" id="channell">
+          <option value="search">Web Search</option>
+          <option value="word-of-mouth">Word of Mouth</option>
+          <option value="other">Other</option>
+        </select>
+      </section>
     </form>
   </main>
 </body>
