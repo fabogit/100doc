@@ -11,10 +11,13 @@ function calculateAdultYears(userAge) {
   return userAge - 18;
 }
 
+totalAdultYears = calculateAdultYears(age);
+console.log(totalAdultYears);
+
 let person = {
-  name: "Max",
-  greet() {
-    alert("Hello!");
+  name: "Max", //Property
+  greet() {     // Method
+    console.log("Hello!");
   },
 };
 
