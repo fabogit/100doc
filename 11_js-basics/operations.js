@@ -13,3 +13,6 @@ result -= 5; // result = result - 5
 result /= 5; // result = result / 5
 result *= 5; // result = result * 5
 console.log(result);
+
+let concat = "a" + " " + "string";
+console.log(concat);
