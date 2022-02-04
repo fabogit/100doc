@@ -20,3 +20,6 @@ console.log(concat);
 let stringLenght = "sfdgdfgdjklfshgs";
 console.log(stringLenght.length);
 console.log(stringLenght.toUpperCase());
+
+let array = ['one', 'two']
+console.log(array.length)
