@@ -16,3 +16,7 @@ console.log(result);
 
 let concat = "a" + " " + "string";
 console.log(concat);
+
+let stringLenght = "sfdgdfgdjklfshgs";
+console.log(stringLenght.length);
+console.log(stringLenght.toUpperCase());
