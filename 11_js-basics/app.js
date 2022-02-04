@@ -11,9 +11,11 @@ function calculateAdultYears(userAge) {
   return userAge - 18;
 }
 
-totalAdultYears = calculateAdultYears(age);
-alert(totalAdultYears);
+let person = {
+  name: "Max",
+  greet() {
+    alert("Hello!");
+  },
+};
 
-age = 45;
-totalAdultYears = calculateAdultYears(age);
-alert(totalAdultYears);
+person.greet();
