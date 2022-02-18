@@ -34,4 +34,4 @@ console.dir(highlightedParagraph);
 // 5. BONUS TASK: Try changing the text content of the <p> element
 //    you selected in (4) and set it to any other text of your choice
 
-highlightedParagraph.textContent = "This was changed using js!"
+highlightedParagraph.textContent = "This was changed using js!";

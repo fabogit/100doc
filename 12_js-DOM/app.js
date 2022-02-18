@@ -20,3 +20,18 @@ anchorElement.href = "https://google.com";
 anchorElement = document.querySelector("#external-link");
 anchorElement = document.querySelector("p a");
 anchorElement.href = "https://academind.com";
+
+//  ADD AN ELEMENT
+// 1 create new element
+
+let newAnchorElement = document.createElement("a");
+newAnchorElement.href = "https://google.com";
+newAnchorElement.textContent = "This leads to Google!";
+
+// 2 access parent element that should hold the new elem
+
+let firstParagraph = document.querySelector("p");
+
+// 3 Insert element into the parent
+
+firstParagraph.append(newAnchorElement);
