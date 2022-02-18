@@ -47,3 +47,10 @@ firstH1Element.remove();
 // select parent of the place where i want to move, append()/insertBefore()
 
 firstParagraph.parentElement.append(firstParagraph);
+
+// only text content
+console.log(firstParagraph.textContent);
+
+// innerHTML
+console.log(firstParagraph.innerHTML);
+firstParagraph.innerHTML = "Hi! This is <strong>important!</strong>";
