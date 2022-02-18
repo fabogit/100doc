@@ -23,15 +23,22 @@ anchorElement.href = "https://academind.com";
 
 //  ADD AN ELEMENT
 // 1 create new element
-
 let newAnchorElement = document.createElement("a");
 newAnchorElement.href = "https://google.com";
 newAnchorElement.textContent = "This leads to Google!";
 
 // 2 access parent element that should hold the new elem
-
 let firstParagraph = document.querySelector("p");
 
 // 3 Insert element into the parent
-
 firstParagraph.append(newAnchorElement);
+
+// REMOVE ELEMENTS
+
+// 1 Select it
+let firstH1Element = document.querySelector("h1");
+
+// 2 Remove it
+firstH1Element.remove();
+// for older browsers
+// firstH1Element.parentElement.removeChild(firstH1Element);
