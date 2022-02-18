@@ -42,3 +42,8 @@ let firstH1Element = document.querySelector("h1");
 firstH1Element.remove();
 // for older browsers
 // firstH1Element.parentElement.removeChild(firstH1Element);
+
+//  MOVE ELEMENTS
+// select parent of the place where i want to move, append()/insertBefore()
+
+firstParagraph.parentElement.append(firstParagraph);
