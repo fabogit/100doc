@@ -45,7 +45,7 @@ edit last commit message
 If already pushed the commit to remote repo,
 force push a commit with an amended message.
 
-`push --force-with-lease` or  `git push --force <remoteName> <branchName>`
+`git push --force-with-lease` or  `git push --force <remoteName> <branchName>`
 
 show branches
 
