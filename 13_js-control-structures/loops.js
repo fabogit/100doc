@@ -26,7 +26,17 @@ const myObject = {
 
 for (const key in myObject) {
   // property name
-  console.log(key)
+  console.log(key);
   // property value
-  console.log(myObject[key])
+  console.log(myObject[key]);
 }
+
+// while loop
+let isFinished = false;
+
+while (!isFinished) {
+  console.log("While loop running");
+  isFinished = confirm("Do you want to quit?");
+}
+
+console.log("While loop ended");
