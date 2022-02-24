@@ -1,4 +1,3 @@
-
 // for loop
 for (let i = 0; i < 10; i++) {
   console.log(i);
@@ -11,9 +10,23 @@ for (let i = 0; i < someArray.length; i++) {
 }
 */
 
-// for or loop
-const users = ['max', 'anna', ' joel']
+// 'for of' loop
+const myArray = ["max", "anna", " joel"];
 
-for (const user of users) {
-  console.log(user)
+for (const element of myArray) {
+  console.log(element);
+}
+
+// 'for in' loop
+const myObject = {
+  name: "max",
+  age: 32,
+  isAdmin: true,
+};
+
+for (const key in myObject) {
+  // property name
+  console.log(key)
+  // property value
+  console.log(myObject[key])
 }
