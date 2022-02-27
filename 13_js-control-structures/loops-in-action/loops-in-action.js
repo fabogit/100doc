@@ -1,4 +1,4 @@
-//  1st example: sum mumbers
+//  1st example: sum mumbers (for loop)
 
 const calculateSumButtonElement = document.querySelector("#calculator button");
 
@@ -18,7 +18,7 @@ function calculateSum(event) {
 
 calculateSumButtonElement.addEventListener("click", calculateSum);
 
-// 2nd example: highlight links
+// 2nd example: highlight links, (for-of loop)
 
 const highlightLinksButtonElement = document.querySelector(
   "#highlight-links button"
@@ -33,3 +33,30 @@ function highlightLinks() {
 }
 
 highlightLinksButtonElement.addEventListener("click", highlightLinks);
+
+//  3d example: display user data, (for-in loop)
+
+const dummyUserData = {
+  firstName: "fab",
+  lastName: "b",
+  age: 34,
+};
+
+const displayUserDataButtonElement =
+  document.querySelector("#user-data button");
+function displayUserData() {
+  const outputDataElement = document.getElementById("output-user-data");
+
+  outputDataElement.innerHTML = "";
+
+  for (const key in dummyUserData) {
+    const newUserDataListElement = document.createElement("li");
+
+    const outputText = key.toUpperCase() + ": " + dummyUserData[key];
+
+    newUserDataListElement.textContent = outputText;
+    outputDataElement.append(newUserDataListElement);
+  }
+}
+
+displayUserDataButtonElement.addEventListener("click", displayUserData);
