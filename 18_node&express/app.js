@@ -1,15 +1,13 @@
-const http = require("http");
+const express = require("express");
 
-function handleRequest(request, response) {
-  if (request.url === "/current-time") {
-    response.statusCode = 200;
-    response.end(`<h1>Current time is ${new Date().toISOString()}</h1>`);
-  } else if (request.url === "/") {
-    response.statusCode = 200;
-    response.end("<h1>Hello World!</h1>");
-  }
-}
+const app = express();
+// localhost:3000/current-time
+app.get("/current-time", function (req, res) {
+  res.send(`<h1>Current time is ${new Date().toISOString()}</h1>`);
+});
+// localhost:3000
+app.get("/", function (req, res) {
+  res.send("<h1>Hello Worls!}</h1>");
+});
 
-const server = http.createServer(handleRequest);
-
-server.listen(3000);
+app.listen(3000);
