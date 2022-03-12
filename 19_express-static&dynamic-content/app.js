@@ -1,12 +1,15 @@
 const path = require("path");
 
 const express = require("express");
+const { use } = require("express/lib/application");
 
 const app = express();
 
+app.use(express.static("public"));
+
 app.get("/", function (req, res) {
   const htmlFilePath = path.join(__dirname, "views", "index.html");
-  res.sendFile(htmlFilePath);;
+  res.sendFile(htmlFilePath);
 });
 
 app.get("/restaurants", function (req, res) {
