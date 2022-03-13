@@ -2,8 +2,6 @@ const fs = require("fs");
 const path = require("path");
 
 const express = require("express");
-const { use } = require("express/lib/application");
-const { pathToFileURL } = require("url");
 
 const app = express();
 
