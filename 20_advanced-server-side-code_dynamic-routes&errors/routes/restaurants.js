@@ -6,11 +6,31 @@ const resData = require("../util/restaurant-data");
 const router = express.Router();
 
 router.get("/restaurants", function (req, res) {
+  let order = req.query.order;
+  let nextOrder = "desc";
+  if (order !== "asc" && order !== "desc") {
+    order = "asc";
+  }
+  if (order === "desc") {
+    nextOrder = "asc";
+  }
+
   const restaurantsJson = resData.getStoredRestaurants();
+
+  restaurantsJson.sort(function (elemA, elemB) {
+    if (
+      (order === "asc" && elemA.name > elemB.name) ||
+      (order === "desc" && elemB.name > elemA.name)
+    ) {
+      return 1;
+    }
+    return -1;
+  });
 
   res.render("restaurants", {
     numberOfRestaurants: restaurantsJson.length,
     restaurants: restaurantsJson,
+    order: nextOrder,
   });
 });
 
