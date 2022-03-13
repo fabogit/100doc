@@ -17,14 +17,11 @@ app.get("/", function (req, res) {
 });
 
 app.get("/restaurants", function (req, res) {
-  const filePath = path.join(__dirname, "data", "restaurants.json");
-
-  const fileData = fs.readFileSync(filePath);
-  const storedRestaurants = JSON.parse(fileData);
+  const restaurantJson = getStoredRestaurants();
 
   res.render("restaurants", {
-    numberOfRestaurants: storedRestaurants.length,
-    restaurants: storedRestaurants,
+    numberOfRestaurants: restaurantJson.length,
+    restaurants: restaurantJson,
   });
 });
 
@@ -51,13 +48,10 @@ app.get("/recommend", function (req, res) {
 app.post("/recommend", function (req, res) {
   const restaurant = req.body;
   restaurant.id = uuid.v4();
-  const filePath = path.join(__dirname, "data", "restaurants.json");
+  const restaurantsJson = getStoredRestaurants();
 
-  const fileData = fs.readFileSync(filePath);
-  const storedRestaurants = JSON.parse(fileData);
-
-  storedRestaurants.push(restaurant);
-  fs.writeFileSync(filePath, JSON.stringify(storedRestaurants));
+  restaurantsJson.push(restaurant);
+  storeRestaurants(restaurantsJson);
 
   res.redirect("/confirm");
 });
