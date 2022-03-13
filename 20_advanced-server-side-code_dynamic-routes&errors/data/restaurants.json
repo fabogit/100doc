@@ -12,5 +12,12 @@
     "cuisine": "french",
     "website": "https://www.google.com/search?q=french+restaurant&tbm=isch&ved=2ahUKEwiDptfR2MH2AhWY_bsIHRRJCm8Q2-cCegQIABAA&oq=french+restaurant&gs_lcp=CgNpbWcQAzIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQ6BAgAEEM6BggAEAcQHlD1CFjCEmDtFGgAcAB4AIABfYgBnAWSAQM0LjOYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=KygtYsPkLpj77_UPlJKp-AY&bih=971&biw=1920",
     "description": "description#2"
+  },
+  {
+    "name": "rest#3",
+    "address": "address#3",
+    "cuisine": "mexican",
+    "website": "https://www.google.com/",
+    "description": "description#3"
   }
 ]
