@@ -42,3 +42,6 @@ console.log(sumUp(...inputNumbers));
 // spread
 const values = [-5, 3, 10];
 console.log(Math.max(...values));
+
+// functions posses inferred propierties, try console.dir(funName) in browser
+console.log(sumUp.name, sumUp.arguments, sumUp.caller, sumUp.prototype)
