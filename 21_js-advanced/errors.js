@@ -1,12 +1,19 @@
-const fs = require('fs');
+const fs = require("fs");
 
 function readFile() {
+  let fileData = "outer scope";
   try {
-    const fileData = fs.readFileSync('data.json');
+    // inner scope declaring, shadow the outer scope
+    const fileData = fs.readFileSync("data.json");
   } catch {
-    console.log('An error occurred!');
+    // inner scope declaring, shadow the outer scope
+    const fileData = "inner scope";
+    console.log("An error occurred!");
+    console.log(fileData);
   }
-  console.log('still inside the function');
+  // outer scope, initial var value
+  console.log(fileData);
+  console.log("still inside the function");
 }
 
 readFile();
