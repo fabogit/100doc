@@ -31,3 +31,16 @@ console.log(developer);
 console.log(cook.title, cook.salary);
 
 developer.describe();
+
+// array destructoring
+const values = ["one", "two"];
+
+const [first, last] = values;
+console.log(first, last);
+
+// object destructoring
+const job = { title: "Developer", location: "New York" };
+
+const { title: jTitle } = job;
+const { location } = job;
+console.log(jTitle, location);
