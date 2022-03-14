@@ -1,5 +1,6 @@
 // assign default value to param
 function greetUser(firstString, secondString = "defaultString") {
+  // build string using Template Literals => `${VAR}`
   console.log(`${firstString} ${secondString}`);
 }
 
