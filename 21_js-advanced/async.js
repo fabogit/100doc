@@ -10,10 +10,16 @@ function readFile() {
   // });
 
   // promises
-  fs.readFile("data.txt").then(function (fileData) {
-    console.log(fileData.toString());
-    console.log("File parsing DONE");
-  });
+  fs.readFile("data.txt")
+    .then(function (fileData) {
+      console.log(fileData.toString());
+      console.log("File parsing DONE");
+    })
+    .then(function () {})
+    // catching errors
+    .catch(function (error) {
+      console.log(error);
+    });
   console.log("DONE");
 }
 
