@@ -11,12 +11,15 @@ router.get("/", function (req, res) {
 router.get("/posts", async function (req, res) {
   const joinQuery = `SELECT posts.*, authors.name AS author_name FROM posts
    INNER JOIN authors ON posts.author_id = authors.id`;
+
   const [postsData] = await db.query(joinQuery);
   res.render("posts-list", { posts: postsData });
 });
 
 router.get("/new-post", async function (req, res) {
-  const [dbAuthors] = await db.query("SELECT * FROM authors");
+  const selectQuery = `SELECT * FROM authors`;
+
+  const [dbAuthors] = await db.query(selectQuery);
   res.render("create-post", { authors: dbAuthors });
 });
 
@@ -29,8 +32,21 @@ router.post("/posts", async function (req, res) {
   ];
   const insertQuery = `INSERT INTO posts (
     title, summary, body, author_id) VALUES (?)`;
+
   await db.query(insertQuery, [data]);
   res.redirect("/posts");
+});
+
+router.get("/posts/:id", async function (req, res) {
+  const whereQuery = `SELECT posts.*, authors.name AS author_name, authors.email AS author_email 
+  FROM posts INNER JOIN authors ON posts.author_id = authors.id
+  WHERE posts.id = ?`;
+
+  const [posts] = await db.query(whereQuery, [req.params.id]);
+  if (!posts || posts.lenght === 0) {
+    return res.status(404).render("404");
+  }
+  res.render("post-detail", { post: posts[0] });
 });
 
 module.exports = router;
