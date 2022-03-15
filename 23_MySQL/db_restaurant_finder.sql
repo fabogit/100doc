@@ -1,2 +1,2 @@
 -- create db
-CREATE SCHEMA restaurant_finder;
+CREATE SCHEMA `restaurant_finder`;
