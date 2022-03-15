@@ -85,4 +85,11 @@ router.post("/posts/:id/edit", async function (req, res) {
   res.redirect("/posts");
 });
 
+router.post("/posts/:id/delete", async function (req, res) {
+  const deleteQuery = `DELETE FROM posts WHERE id = ?`;
+
+  await db.query(deleteQuery, [req.params.id]);
+  res.redirect("/posts");
+});
+
 module.exports = router;
