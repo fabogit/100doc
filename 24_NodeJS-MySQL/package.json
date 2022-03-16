@@ -1,5 +1,5 @@
 {
-  "name": "web-development-complete-guide",
+  "name": "node-mysql",
   "version": "1.0.0",
   "description": "blog",
   "main": "app.js",
@@ -7,7 +7,7 @@
     "start": "nodemon app.js"
   },
   "keywords": [],
-  "author": "Maximilian Schwarzmüller (Academind GmbH)",
+  "author": "fabo",
   "license": "MIT",
   "dependencies": {
     "ejs": "^3.1.6",
