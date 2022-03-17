@@ -69,6 +69,37 @@ router.get("/posts/:id", async function (req, res) {
   res.render("post-detail", { post: postData });
 });
 
+router.get("/posts/:id/edit", async function (req, res) {
+  const postId = req.params.id;
+  const query = { _id: new ObjectId(postId) };
+  const options = { projection: { title: 1, summary: 1, body: 1 } };
+  const postData = await db.getDb().collection("posts").findOne(query, options);
+
+  if (!postData) {
+    return res.status(404).render("404");
+  }
+  // pass list to f/end
+  res.render("update-post", { post: postData });
+});
+
+router.post("/posts/:id/edit", async function (req, res) {
+  const postId = new ObjectId(req.params.id);
+  const filter = { _id: postId };
+  const update = {
+    $set: {
+      title: req.body.title,
+      summary: req.body.summary,
+      body: req.body.content,
+    },
+  };
+  const postData = await db
+    .getDb()
+    .collection("posts")
+    .updateOne(filter, update);
+
+  res.redirect("/posts");
+});
+
 router.get("/new-post", async function (req, res) {
   const query = {};
   const options = {};
