@@ -11,22 +11,25 @@ router.get("/", function (req, res) {
 });
 
 router.get("/posts", async function (req, res) {
+  const query = {};
+  const options = { projection: { title: 1, summary: 1, "author.name": 1 } };
   const postsArray = await db
     .getDb()
     .collection("posts")
-    .find({})
-    .project({ title: 1, summary: 1, "author.name": 1 })
+    .find(query, options)
     .toArray();
   res.render("posts-list", { posts: postsArray });
 });
 
 router.post("/posts", async function (req, res) {
-  //  submitted <form> data in req.body
+  //  query using submitted <form> data in req.body
   const authorId = new ObjectId(req.body.author);
+  const query = { _id: authorId };
+  const options = {};
   const authorDocument = await db
     .getDb()
     .collection("authors")
-    .findOne({ _id: authorId });
+    .findOne(query, options);
 
   const newPost = {
     title: req.body.title,
@@ -44,8 +47,27 @@ router.post("/posts", async function (req, res) {
   res.redirect("/posts");
 });
 
+router.get("/posts/:id", async function (req, res) {
+  const postId = req.params.id;
+  const query = { _id: new ObjectId(postId) };
+  const options = { projection: { summary: 0 } };
+  const postData = await db.getDb().collection("posts").findOne(query, options);
+
+  if (!postData) {
+    return res.status(404).render("404");
+  }
+  // pass data to f/end
+  res.render("post-detail", { post: postData });
+});
+
 router.get("/new-post", async function (req, res) {
-  const authorsArray = await db.getDb().collection("authors").find().toArray();
+  const query = {};
+  const options = {};
+  const authorsArray = await db
+    .getDb()
+    .collection("authors")
+    .find(query, options)
+    .toArray();
   // pass list to f/end
   res.render("create-post", { authors: authorsArray });
 });
