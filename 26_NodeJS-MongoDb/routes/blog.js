@@ -48,8 +48,15 @@ router.post("/posts", async function (req, res) {
 });
 
 router.get("/posts/:id", async function (req, res) {
-  const postId = req.params.id;
-  const query = { _id: new ObjectId(postId) };
+  let postId = req.params.id;
+  try {
+    postId = new ObjectId(postId);
+  } catch (error) {
+    return res.status(404).render("404");
+    // forward error to middleware
+    // return next(error);
+  }
+  const query = { _id: postId };
   const options = { projection: { summary: 0 } };
   const postData = await db.getDb().collection("posts").findOne(query, options);
 
