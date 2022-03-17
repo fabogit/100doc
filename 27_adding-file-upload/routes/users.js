@@ -1,7 +1,8 @@
 const express = require("express");
 const multer = require("multer");
 
-const upload = multer({});
+// for absolute path use { dest: __dirname +'/folder/'}
+const upload = multer({ dest: "images" });
 const router = express.Router();
 
 router.get("/", function (req, res) {
@@ -13,9 +14,13 @@ router.get("/new-user", function (req, res) {
 });
 
 router.post("/profiles", upload.single("image-upload"), function (req, res) {
-  const uploadedImageFile = req.file
-  const userData = req.body
-  res.redirect("/profiles");
+  const uploadedImageFile = req.file;
+  const userData = req.body;
+
+  console.log(uploadedImageFile);
+  console.log(userData);
+
+  res.redirect("/");
 });
 
 module.exports = router;
