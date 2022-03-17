@@ -10,6 +10,7 @@
   <%- include('includes/header') %>
   <main>
     <h1>Add a new post</h1>
+    <!-- <form> payload object sent at POST /posts -->
     <form action="/posts" method="POST">
       <div class="form-control">
         <label for="title">Title</label>
@@ -26,9 +27,10 @@
       <div class="form-control">
         <label for="author">Select Author</label>
         <select id="author" name="author">
+          <!-- response from GET /new-post -->
           <% for (const author of authors) { %>
             <option value="<%= author._id %>"><%= author.name %></option>
-          <% } %> 
+          <% } %>
         </select>
       </div>
       <button class="btn">Add Post</button>
