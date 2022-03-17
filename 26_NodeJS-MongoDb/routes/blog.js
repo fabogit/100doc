@@ -47,7 +47,7 @@ router.post("/posts", async function (req, res) {
   res.redirect("/posts");
 });
 
-router.get("/posts/:id", async function (req, res) {
+router.get("/posts/:id", async function (req, res, next) {
   let postId = req.params.id;
   try {
     postId = new ObjectId(postId);
