@@ -24,9 +24,8 @@ app.use(function (error, req, res, next) {
 });
 
 const port = 3000;
-db.connectToDatabase().then(function () {
-  console.log("connected to mongoDB");
+db.connectToMongoDB().then(function () {
   app.listen(port, () => {
-    console.log(`server runnin on port ${port}`);
+    console.log(`NodeJS: [OK] \nRunning on port: ${port}`);
   });
 });

@@ -1,28 +1,31 @@
-const { get } = require("express/lib/response");
 const mongodb = require("mongodb");
 
 const MongoClient = mongodb.MongoClient;
 
 const host = "127.0.0.1";
 const port = "27017";
-const db = "blog";
 const mongoUrl = `mongodb://${host}:${port}`;
+const dbName = "blog";
 
 let database;
 
-async function connect() {
+async function connectMC() {
+  // connect to the mongo server
   const client = await MongoClient.connect(mongoUrl);
-  database = client.db(db);
+  console.log("MongoDB: [OK]");
+  // connect to the database
+  database = client.db(dbName);
 }
 
 function getDb() {
   if (!database) {
     throw { message: "Database connection not established!" };
   }
+  console.log(`Db name: ${dbName}`)
   return database;
 }
 
 module.exports = {
-  connectToDatabase: connect,
+  connectToMongoDB: connectMC,
   getDb: getDb,
 };
