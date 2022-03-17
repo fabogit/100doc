@@ -10,7 +10,9 @@
   <%- include('includes/header') %>
   <main>
     <h1>Update post</h1>
+     <!-- <form> payload object sent at POST /posts/:id/edit -->
     <form action="/posts/<%= post._id %>/edit" method="POST">
+      <!-- value="" fill in the data to update -->
       <div class="form-control">
         <label for="title">Title</label>
         <input type="text" id="title" name="title" value="<%= post.title %>" required>
