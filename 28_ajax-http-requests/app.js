@@ -23,7 +23,6 @@ app.use(function (error, req, res, next) {
   res.status(500).render("500");
 });
 
-
 db.connectToMongoDB().then(function () {
   const port = 3000;
   app.listen(port, () => {
