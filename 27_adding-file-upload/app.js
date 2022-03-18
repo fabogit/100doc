@@ -1,21 +1,21 @@
-const path = require('path');
+const path = require("path");
 
-const express = require('express');
+const express = require("express");
 
-const userRoutes = require('./routes/users');
-const db = require('./data/database');
+const userRoutes = require("./routes/users");
+const db = require("./data/database");
 
 const app = express();
 
 // ejs config
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
-// enable requests body parsing 
+// enable requests body parsing
 app.use(express.urlencoded({ extended: false }));
 // allow acces to static files from folders
-app.use(express.static('public'));
-app.use('/images', express.static('images'));
+app.use(express.static("public"));
+app.use("/images", express.static("images"));
 
 app.use(userRoutes);
 
