@@ -15,15 +15,24 @@ const storageConfig = multer.diskStorage({
 const upload = multer({ storage: storageConfig });
 const router = express.Router();
 
-router.get("/", function (req, res) {
-  res.render("profiles");
+router.get("/", async function (req, res) {
+  const query = {};
+  const options = {};
+  const usersArray = await db
+    .getDb()
+    .collection("users")
+    .find(query, options)
+    .toArray();
+
+  res.render("profiles", { users: usersArray });
 });
 
 router.get("/new-user", function (req, res) {
   res.render("new-user");
 });
 
-router.post("/profiles",
+router.post(
+  "/profiles",
   upload.single("image-upload"),
   async function (req, res) {
     const uploadedImageFile = req.file;

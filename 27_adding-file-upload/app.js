@@ -7,11 +7,15 @@ const db = require('./data/database');
 
 const app = express();
 
+// ejs config
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+// enable requests body parsing 
 app.use(express.urlencoded({ extended: false }));
+// allow acces to static files from folders
 app.use(express.static('public'));
+app.use('/images', express.static('images'));
 
 app.use(userRoutes);
 
