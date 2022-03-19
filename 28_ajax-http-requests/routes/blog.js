@@ -132,6 +132,7 @@ router.post("/posts/:id/delete", async function (req, res) {
 
 router.get("/posts/:id/comments", async function (req, res) {
   const postId = new ObjectId(req.params.id);
+  // retrive comments to pass to ajax request from the f/end
   const comments = await db
     .getDb()
     .collection("comments")
