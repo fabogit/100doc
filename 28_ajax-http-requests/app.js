@@ -26,6 +26,6 @@ app.use(function (error, req, res, next) {
 db.connectToMongoDB().then(function () {
   const port = 3000;
   app.listen(port, () => {
-    console.log(`\u2705 NodeJS\nRunning on port: ${port}`);
+    console.log(`[   \u2705   ] NodeJS\nRunning on port: ${port}`);
   });
 });
