@@ -29,16 +29,21 @@ async function fetchCommentsForPost() {
   // decode json response
   const responseData = await response.json();
 
-  // create comments <ol> containing comment <li>
-  const commentsListElement = createCommentsList(responseData);
-  // empty comments section html
-  commentsSectionElement.innerHTML = "";
-  // populate it
-  commentsSectionElement.appendChild(commentsListElement);
+  if (responseData && responseData.length > 0) {
+    // create comments <ol> containing comment <li>
+    const commentsListElement = createCommentsList(responseData);
+    // empty comments section html
+    commentsSectionElement.innerHTML = "";
+    // populate it
+    commentsSectionElement.appendChild(commentsListElement);
+  } else {
+    commentsSectionElement.firstElementChild.textContent =
+      "There are no comments yet, Maybe add one?";
+  }
 }
 
 async function saveComment(event) {
-  // prevent browser from sending automatic request
+  // prevent browser from sending automatic request (btn submission)
   event.preventDefault();
   const postId = commentsFormElement.dataset.postid;
 
@@ -47,13 +52,15 @@ async function saveComment(event) {
 
   const comment = { title: enteredTitle, text: enteredText };
 
-  console.log(enteredTitle, enteredText);
-  await fetch(`/posts/${postId}/comments`, {
+  // add comment
+  const response = await fetch(`/posts/${postId}/comments`, {
     method: "POST",
     // encode to json
     body: JSON.stringify(comment),
     headers: { "Content-Type": "application/json" },
   });
+  // fetch new comments
+  fetchCommentsForPost();
 }
 
 loadCommentsBtnElement.addEventListener("click", fetchCommentsForPost);
