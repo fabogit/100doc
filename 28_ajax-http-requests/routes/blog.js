@@ -139,7 +139,7 @@ router.get("/posts/:id/comments", async function (req, res) {
     .find({ postId: postId })
     .toArray();
 
-  // encode response as json to pass at the f/end
+  // send response as json to the f/end
   res.json(comments);
 });
 
@@ -151,7 +151,7 @@ router.post("/posts/:id/comments", async function (req, res) {
     text: req.body.text,
   };
   await db.getDb().collection("comments").insertOne(newComment);
-  res.redirect(`/posts/${req.params.id}`);
+  res.json({ message: "Comment added!" });
 });
 
 module.exports = router;

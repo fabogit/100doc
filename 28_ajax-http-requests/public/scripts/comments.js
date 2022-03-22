@@ -25,7 +25,7 @@ async function fetchCommentsForPost() {
   // const btn = event.target
   const postId = loadCommentsBtnElement.dataset.postid;
   // fetch data from GET /posts/:id/comments
-  const response = await fetch(`/posts/${postId}/comments`);
+  const response = await fetch(`/posts/${postId}/comments`, { method: "GET" });
   // decode json response
   const responseData = await response.json();
 
@@ -37,13 +37,23 @@ async function fetchCommentsForPost() {
   commentsSectionElement.appendChild(commentsListElement);
 }
 
-function saveComment(event) {
+async function saveComment(event) {
   // prevent browser from sending automatic request
   event.preventDefault();
+  const postId = commentsFormElement.dataset.postid;
+
   const enteredTitle = commentTitleElement.value;
   const enteredText = commentTextElement.value;
 
+  const comment = { title: enteredTitle, text: enteredText };
+
   console.log(enteredTitle, enteredText);
+  await fetch(`/posts/${postId}/comments`, {
+    method: "POST",
+    // encode to json
+    body: JSON.stringify(comment),
+    headers: { "Content-Type": "application/json" },
+  });
 }
 
 loadCommentsBtnElement.addEventListener("click", fetchCommentsForPost);
