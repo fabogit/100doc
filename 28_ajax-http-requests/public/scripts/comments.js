@@ -24,21 +24,33 @@ function createCommentsList(comments) {
 async function fetchCommentsForPost() {
   // const btn = event.target
   const postId = loadCommentsBtnElement.dataset.postid;
-  // fetch data from GET /posts/:id/comments
-  const response = await fetch(`/posts/${postId}/comments`, { method: "GET" });
-  // decode json response
-  const responseData = await response.json();
 
-  if (responseData && responseData.length > 0) {
-    // create comments <ol> containing comment <li>
-    const commentsListElement = createCommentsList(responseData);
-    // empty comments section html
-    commentsSectionElement.innerHTML = "";
-    // populate it
-    commentsSectionElement.appendChild(commentsListElement);
-  } else {
-    commentsSectionElement.firstElementChild.textContent =
-      "There are no comments yet, Maybe add one?";
+  try {
+    // fetch data from GET /posts/:id/comments
+    const response = await fetch(`/posts/${postId}/comments`, {
+      method: "GET",
+    });
+
+    if (!response.ok) {
+      alert("Fetching comments failed!");
+      return;
+    }
+    // decode json response
+    const responseData = await response.json();
+
+    if (responseData && responseData.length > 0) {
+      // create comments <ol> containing comment <li>
+      const commentsListElement = createCommentsList(responseData);
+      // empty comments section html
+      commentsSectionElement.innerHTML = "";
+      // populate it
+      commentsSectionElement.appendChild(commentsListElement);
+    } else {
+      commentsSectionElement.firstElementChild.textContent =
+        "There are no comments yet, Maybe add one?";
+    }
+  } catch (error) {
+    alert("Getting comments failed!");
   }
 }
 
@@ -53,14 +65,23 @@ async function saveComment(event) {
   const comment = { title: enteredTitle, text: enteredText };
 
   // add comment
-  const response = await fetch(`/posts/${postId}/comments`, {
-    method: "POST",
-    // encode to json
-    body: JSON.stringify(comment),
-    headers: { "Content-Type": "application/json" },
-  });
-  // fetch new comments
-  fetchCommentsForPost();
+  try {
+    const response = await fetch(`/posts/${postId}/comments`, {
+      method: "POST",
+      // encode to json
+      body: JSON.stringify(comment),
+      headers: { "Content-Type": "application/json" },
+    });
+    // res status 20x/30x
+    if (response.ok) {
+      // fetch new comments
+      fetchCommentsForPost();
+    } else {
+      alert("Could not send comment!");
+    }
+  } catch (error) {
+    alert("Could not send request - try later");
+  }
 }
 
 loadCommentsBtnElement.addEventListener("click", fetchCommentsForPost);

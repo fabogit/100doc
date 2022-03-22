@@ -141,6 +141,9 @@ router.get("/posts/:id/comments", async function (req, res) {
 
   // send response as json to the f/end
   res.json(comments);
+
+  // test for errors
+  // res.status(500).json({message: 'Error'})
 });
 
 router.post("/posts/:id/comments", async function (req, res) {
