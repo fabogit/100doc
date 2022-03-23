@@ -20,8 +20,32 @@ router.get("/login", function (req, res) {
 router.post("/signup", async function (req, res) {
   const userData = req.body;
   const enteredEmail = userData.email;
-  const confirmEmail = userData["confirm-email"];
+  const enteredconfirmEmail = userData["confirm-email"];
   const enteredPassword = userData.password;
+
+  // validate data
+  if (
+    !enteredEmail ||
+    !enteredconfirmEmail ||
+    !enteredPassword ||
+    enteredPassword.trim() < 6 ||
+    enteredEmail !== enteredconfirmEmail ||
+    !enteredEmail.includes("@")
+  ) {
+    console.log("Incorrect data");
+    return res.redirect("/signup");
+  }
+
+  // check if email already exist
+  const existingUser = await db
+    .getDb()
+    .collection("users")
+    .findOne({ email: enteredEmail });
+
+  if (existingUser) {
+    console.log("User exists already");
+    return res.redirect("/signup");
+  }
 
   // hash&salt entered password
   const hashedPassword = await bcrypt.hash(enteredPassword, 12);
