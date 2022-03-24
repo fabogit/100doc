@@ -35,6 +35,13 @@ app.use(
     saveUninitialized: false,
     // where to store the session
     store: sessionStore,
+    // cookie options
+    /*  
+   cookie:{
+      // 2days, if set browser wont delete cookie when closed
+      maxAge: 2 * 24 * 60 * 60 * 1000
+    } 
+    */
   })
 );
 
