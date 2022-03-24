@@ -107,6 +107,12 @@ router.get("/admin", function (req, res) {
   res.render("admin");
 });
 
-router.post("/logout", function (req, res) {});
+router.post("/logout", function (req, res) {
+  // void session
+  req.session.user = null;
+  req.session.isAuthenticated = false;
+  // no need to wait db, / dont rely on session
+  res.redirect("/");
+});
 
 module.exports = router;
