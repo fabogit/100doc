@@ -91,6 +91,7 @@ router.post("/login", async function (req, res) {
 });
 
 router.get("/admin", function (req, res) {
+  // check if user is authorized
   res.render("admin");
 });
 
