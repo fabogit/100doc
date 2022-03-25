@@ -10,7 +10,22 @@ router.get("/", function (req, res) {
 });
 
 router.get("/signup", function (req, res) {
-  res.render("signup");
+  // flashing session data, to EJS template
+  let sessionInputData = req.session.inputData;
+
+  if (!sessionInputData) {
+    sessionInputData = {
+      hasError: false,
+      email: "",
+      confirmEmail: "",
+      password: " ",
+    };
+  }
+
+  // clear session data
+  req.session.sessionInputData = null;
+
+  res.render("signup", { inputData: sessionInputData });
 });
 
 router.get("/login", function (req, res) {
@@ -32,8 +47,20 @@ router.post("/signup", async function (req, res) {
     enteredEmail !== enteredconfirmEmail ||
     !enteredEmail.includes("@")
   ) {
-    console.log("Incorrect data");
-    return res.redirect("/signup");
+    // store entered data
+    req.session.inputData = {
+      hasError: true,
+      message: "Invalid input - please check your data!",
+      email: enteredEmail,
+      confirmEmail: enteredconfirmEmail,
+      password: enteredPassword,
+    };
+
+    req.session.save(function () {
+      res.redirect("/signup");
+    });
+    // return after saving session
+    return;
   }
 
   // check if email already exist
