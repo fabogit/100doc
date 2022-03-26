@@ -10,7 +10,7 @@ router.get("/", function (req, res) {
 });
 
 router.get("/signup", function (req, res) {
-  // flashing session data, to EJS template
+  // flashing POST /signup session data, to EJS template
   let sessionInputData = req.session.inputData;
 
   if (!sessionInputData) {
@@ -18,18 +18,14 @@ router.get("/signup", function (req, res) {
       hasError: false,
       email: "",
       confirmEmail: "",
-      password: " ",
+      password: "",
     };
   }
 
   // clear session data
-  req.session.sessionInputData = null;
+  req.session.inputData = null;
 
   res.render("signup", { inputData: sessionInputData });
-});
-
-router.get("/login", function (req, res) {
-  res.render("login");
 });
 
 router.post("/signup", async function (req, res) {
@@ -43,11 +39,11 @@ router.post("/signup", async function (req, res) {
     !enteredEmail ||
     !enteredconfirmEmail ||
     !enteredPassword ||
-    enteredPassword.trim() < 6 ||
+    enteredPassword.trim().length < 6 ||
     enteredEmail !== enteredconfirmEmail ||
     !enteredEmail.includes("@")
   ) {
-    // store entered data
+    // if entered data is wrong, store in session and redirect
     req.session.inputData = {
       hasError: true,
       message: "Invalid input - please check your data!",
@@ -82,8 +78,13 @@ router.post("/signup", async function (req, res) {
     password: hashedPassword,
   };
 
+  // insert user
   await db.getDb().collection("users").insertOne(user);
   res.redirect("/login");
+});
+
+router.get("/login", function (req, res) {
+  res.render("login");
 });
 
 router.post("/login", async function (req, res) {
