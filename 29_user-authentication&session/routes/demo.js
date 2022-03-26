@@ -122,17 +122,37 @@ router.post("/login", async function (req, res) {
   req.session.isAuthenticated = true;
   // redirect user after session data is stored
   req.session.save(function () {
-    res.redirect("/admin");
+    res.redirect("/profile");
   });
 });
 
-router.get("/admin", function (req, res) {
+router.get("/admin", async function (req, res) {
   // checking if user is authenticated
   // !req.session.user also works
   if (!req.session.isAuthenticated) {
     return res.status(401).render("401");
   }
+
+  const user = await db
+    .getDb()
+    .collection("users")
+    .findOne({ _id: req.session.user.id });
+
+  // check user role
+  if (!user || !user.isAdmin) {
+    res.status(403).render("403");
+  }
+
   res.render("admin");
+});
+
+router.get("/profile", function (req, res) {
+  // checking if user is authenticated
+  // !req.session.user also works
+  if (!req.session.isAuthenticated) {
+    return res.status(401).render("401");
+  }
+  res.render("profile");
 });
 
 router.post("/logout", function (req, res) {
