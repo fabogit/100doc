@@ -43,7 +43,8 @@ router.post("/signup", async function (req, res) {
     enteredEmail !== enteredconfirmEmail ||
     !enteredEmail.includes("@")
   ) {
-    // if entered data is wrong, store in session and redirect
+    // if entered data is wrong, store session and reload page
+    // and use the saved session data to fill input fields
     req.session.inputData = {
       hasError: true,
       message: "Invalid input - please check your data!",
@@ -66,8 +67,19 @@ router.post("/signup", async function (req, res) {
     .findOne({ email: enteredEmail });
 
   if (existingUser) {
-    console.log("User exists already");
-    return res.redirect("/signup");
+    // user already exists, store in session input data and reload page
+    // session data will fill input fields on reload
+    req.session.inputData = {
+      hasError: true,
+      message: "User exists already!",
+      email: enteredEmail,
+      confirmEmail: enteredconfirmEmail,
+      password: enteredPassword,
+    };
+    req.session.save(function () {
+      res.redirect("/signup");
+    });
+    return;
   }
 
   // hash&salt entered password
@@ -84,7 +96,21 @@ router.post("/signup", async function (req, res) {
 });
 
 router.get("/login", function (req, res) {
-  res.render("login");
+  // flashing POST /login session data, to EJS template
+  let sessionInputData = req.session.inputData;
+
+  if (!sessionInputData) {
+    sessionInputData = {
+      hasError: false,
+      email: "",
+      password: "",
+    };
+  }
+
+  // clear session data
+  req.session.inputData = null;
+
+  res.render("login", { inputData: sessionInputData });
 });
 
 router.post("/login", async function (req, res) {
@@ -98,9 +124,18 @@ router.post("/login", async function (req, res) {
     .collection("users")
     .findOne({ email: enteredEmail });
 
+  // no user found
   if (!existingUser) {
-    console.log("Wrong email!");
-    return res.redirect("/login");
+    req.session.inputData = {
+      hasError: true,
+      message: "Could not log you in - check your credentials!",
+      email: enteredEmail,
+      password: enteredPassword,
+    };
+    req.session.save(function () {
+      res.redirect("/login");
+    });
+    return;
   }
 
   // compare inserted password to stored password
@@ -109,9 +144,18 @@ router.post("/login", async function (req, res) {
     existingUser.password
   );
 
+  // wrong password
   if (!passwordsAreEqual) {
-    console.log("Wrong password!");
-    return res.redirect("/login");
+    req.session.inputData = {
+      hasError: true,
+      message: "Could not log you in - check your credentials!",
+      email: enteredEmail,
+      password: enteredPassword,
+    };
+    req.session.save(function () {
+      res.redirect("/login");
+    });
+    return;
   }
 
   // adding user data to the session
@@ -138,9 +182,9 @@ router.get("/admin", async function (req, res) {
     .collection("users")
     .findOne({ _id: req.session.user.id });
 
-  // check user role
+  // check for admin role
   if (!user || !user.isAdmin) {
-    res.status(403).render("403");
+    return res.status(403).render("403");
   }
 
   res.render("admin");
