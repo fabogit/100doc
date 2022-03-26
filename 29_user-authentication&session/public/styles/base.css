@@ -1,5 +1,6 @@
 html {
   font-family: "Roboto", sans-serif;
+  background-color: lavender;
 }
 
 body {
@@ -20,6 +21,10 @@ a {
 a:hover,
 a:active {
   color: rgb(113, 0, 128);
+}
+
+#signup {
+  background-color: rgb(141, 141, 151);
 }
 
 #main-header {

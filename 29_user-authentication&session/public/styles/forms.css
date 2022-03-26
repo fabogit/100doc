@@ -16,7 +16,7 @@ input {
   border: 1px solid rgb(204, 204, 204);
   width: 100%;
   box-sizing: border-box;
-  color: rgb(78, 73, 73);
+  /* color: rgb(78, 73, 73); */
 }
 
 input:focus {
