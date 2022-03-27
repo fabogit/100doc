@@ -31,6 +31,8 @@ app.use(
     store: sessionStore,
     cookie: {
       maxAge: 2 * 24 * 60 * 60 * 1000,
+      // same site cookie to partially contrast CSRF
+      sameSite: "lax",
     },
   })
 );
