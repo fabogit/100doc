@@ -1,5 +1,5 @@
 html {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 body {
@@ -14,7 +14,7 @@ main {
 }
 
 a {
-  color:rgb(70, 0, 128);
+  color: rgb(70, 0, 128);
 }
 
 a:hover,
@@ -95,7 +95,7 @@ li {
 .btn.btn-alt {
   background-color: transparent;
   border: none;
-  color:rgb(70, 0, 128);
+  color: rgb(70, 0, 128);
 }
 
 .btn.btn-alt:hover,
