@@ -5,8 +5,11 @@
   <%- include('includes/header.ejs') %>
     <main>
       <h1>The Profile Page</h1>
-      <p>This is your personal profile page, if you're authenticated (logged
-        in) and authorized.</p>
+      <p>
+        This is your personal profile page, you should only get here if
+        you're authenticated (isAuth = true), no authorization is required
+        (isAdmin = null/false).
+      </p>
     </main>
 </body>
 

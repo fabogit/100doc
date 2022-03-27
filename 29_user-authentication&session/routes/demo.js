@@ -170,7 +170,7 @@ router.post("/login", async function (req, res) {
   });
 });
 
-router.get("/admin", async function (req, res) {
+router.get("/admin", function (req, res) {
   // checking if user is authenticated
   // if (!req.session.isAuthenticated) {
   if (!res.locals.isAuth) {
