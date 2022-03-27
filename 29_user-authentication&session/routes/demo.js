@@ -172,18 +172,19 @@ router.post("/login", async function (req, res) {
 
 router.get("/admin", async function (req, res) {
   // checking if user is authenticated
-  // !req.session.user also works
-  if (!req.session.isAuthenticated) {
+  // if (!req.session.isAuthenticated) {
+  if (!res.locals.isAuth) {
     return res.status(401).render("401");
   }
-
+  /* 
   const user = await db
     .getDb()
     .collection("users")
     .findOne({ _id: req.session.user.id });
-
+ */
   // check for admin role
-  if (!user || !user.isAdmin) {
+  // if (!user || !user.isAdmin) {
+  if (!res.locals.isAdmin) {
     return res.status(403).render("403");
   }
 
@@ -192,8 +193,7 @@ router.get("/admin", async function (req, res) {
 
 router.get("/profile", function (req, res) {
   // checking if user is authenticated
-  // !req.session.user also works
-  if (!req.session.isAuthenticated) {
+  if (!res.locals.isAuth) {
     return res.status(401).render("401");
   }
   res.render("profile");
