@@ -6,6 +6,8 @@
   <main>
     <h1>Send Money</h1>
     <form action="/transaction" method="POST">
+      <!-- csrfToken in hidden input, csurf pkg will look for name=_csrf by default -->
+      <input type="hidden" value="<%= csrfToken %>" name="_csrf">
       <div class="form-control">
         <label for="recipient">Recipient Email</label>
         <input type="email" id="recipient" name="recipient">

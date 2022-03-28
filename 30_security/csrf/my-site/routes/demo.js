@@ -153,7 +153,9 @@ router.get("/transaction", function (req, res) {
   if (!res.locals.isAuth) {
     return res.status(401).render("401");
   }
-  res.render("transaction");
+  // generate token to send to transaction.ejs template
+  const csrfToken = req.csrfToken();
+  res.render("transaction", { csrfToken: csrfToken});
 });
 
 router.post("/transaction", async function (req, res) {
