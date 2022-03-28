@@ -10,7 +10,8 @@
         <% for (const comment of comments) { %>
           <li>
             <!-- if user write <script>some code</script> browser will parse and execute it -->
-            <%- comment.text %>
+            <!-- escape the inner html, to render as plain text (ejs %= instead %-) -->
+            <%= comment.text %>
           </li>
         <% } %>
       </ol>
