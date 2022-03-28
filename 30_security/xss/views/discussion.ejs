@@ -9,7 +9,7 @@
       <ol>
         <% for (const comment of comments) { %>
           <li>
-            <!-- if user write html/js code browser will parse and execute it -->
+            <!-- if user write <script>some code</script> browser will parse and execute it -->
             <%- comment.text %>
           </li>
         <% } %>
