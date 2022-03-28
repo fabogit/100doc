@@ -12,6 +12,8 @@ router.get("/discussion", async function (req, res) {
   let filter = "";
 
   if (req.query.author) {
+    // SQL inject into req.query.author =>
+    // username"; DROP TABLE comments; SELECT * FROM comments WHERE author = "username
     filter = `WHERE author = "${req.query.author}"`;
   }
 
