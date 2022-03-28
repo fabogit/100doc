@@ -9,6 +9,7 @@
       <ol>
         <% for (const comment of comments) { %>
           <li>
+            <!-- if user write html/js code browser will parse and execute it -->
             <%- comment.text %>
           </li>
         <% } %>
@@ -17,6 +18,7 @@
     <section>
 
       <form action="/discussion/comment" method="POST">
+        <!-- also CSRF token can be implemented -->
         <div class="form-control">
           <label for="comment">My Comment</label>
           <textarea name="comment" id="comment" rows="5"></textarea>
