@@ -1,7 +1,6 @@
 const db = require("../data/database");
 const mongodb = require("mongodb");
-const { restart } = require("nodemon");
-const { post } = require("../routes/blog");
+
 const ObjectId = mongodb.ObjectId;
 // const { ObjectId } = require("mongodb");
 
@@ -25,7 +24,7 @@ class Post {
       // throw new error || return
       return;
     }
-    
+
     const postDocument = await db.getDb().collection("posts").findOne({ _id: this.id });
     this.title = postDocument.title;
     this.content = postDocument.content;

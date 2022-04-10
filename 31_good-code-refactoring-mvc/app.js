@@ -4,11 +4,11 @@ const express = require("express");
 const session = require("express-session");
 const csrf = require("csurf");
 
-const sessionConfig = require('./config/session');
+const sessionConfig = require("./config/session");
 const db = require("./data/database");
 const authRoutes = require("./routes/auth");
 const blogRoutes = require("./routes/blog");
-const authMiddleware = requestAnimationFrame('./middlewares/auth-middleware');
+const authMiddleware = require("./middlewares/auth-middleware");
 
 const mongoDbSessionStore = sessionConfig.createSessionStore(session);
 const app = express();
