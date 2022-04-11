@@ -1,11 +1,10 @@
-function getSessionErrorData(req) {
+function getSessionErrorData(req, defaultValues) {
   let sessionInputData = req.session.inputData;
 
   if (!sessionInputData) {
     sessionInputData = {
       hasError: false,
-      title: "",
-      content: "",
+      ...defaultValues,
     };
   }
 
@@ -14,10 +13,10 @@ function getSessionErrorData(req) {
   return sessionInputData;
 }
 
-function flasErrorsToSession(req, data, action) {
+function flashErrorsToSession(req, data, action) {
   req.session.inputData = {
     hasError: true,
-    ...data
+    ...data,
   };
 
   req.session.save(action);
@@ -25,5 +24,5 @@ function flasErrorsToSession(req, data, action) {
 
 module.exports = {
   getSessionErrorData: getSessionErrorData,
-  flasErrorsToSession: flasErrorsToSession
+  flashErrorsToSession: flashErrorsToSession,
 };

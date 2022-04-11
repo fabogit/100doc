@@ -1,5 +1,6 @@
 const Post = require("../models/post");
 const validationSession = require("../util/validation-session");
+const validation = require("../util/validation");
 
 function getHome(req, res) {
   res.render("welcome", { csrfToken: req.csrfToken() });
@@ -13,7 +14,11 @@ async function getAdmin(req, res) {
   // calling static method, no need to new Post obj
   const posts = await Post.fetchAll();
 
-  const sessionErrorData = validationSession.getSessionErrorData(req);
+  const sessionErrorData = validationSession.getSessionErrorData(req, {
+    // new post is empty
+    title: "",
+    content: "",
+  });
 
   res.render("admin", {
     posts: posts,
@@ -26,20 +31,21 @@ async function createPost(req, res) {
   const enteredTitle = req.body.title;
   const enteredContent = req.body.content;
 
-  if (
-    !enteredTitle ||
-    !enteredContent ||
-    enteredTitle.trim() === "" ||
-    enteredContent.trim() === ""
-  ) {
-    req.session.inputData = {
-      hasError: true,
-      message: "Invalid input - please check your data.",
-      title: enteredTitle,
-      content: enteredContent,
-    };
+  if (!validation.postIsValid(enteredTitle, enteredContent)) {
+    validationSession.flashErrorsToSession(
+      req,
+      // data
+      {
+        message: "Invalid input - please check your data.",
+        title: enteredTitle,
+        content: enteredContent,
+      },
+      // action
+      function () {
+        res.redirect("/admin");
+      }
+    );
 
-    res.redirect("/admin");
     return; // or return res.redirect('/admin'); => Has the same effect
   }
 
@@ -57,7 +63,11 @@ async function getSinglePost(req, res) {
     return res.render("404"); // 404.ejs is missing at this point - it will be added later!
   }
 
-  const sessionErrorData = validationSession.getSessionErrorData(req);
+  const sessionErrorData = validationSession.getSessionErrorData(req, {
+    // passing data to edit
+    title: post.title,
+    content: post.content,
+  });
 
   res.render("single-post", {
     post: post,
@@ -70,13 +80,8 @@ async function updatePost(req, res) {
   const enteredTitle = req.body.title;
   const enteredContent = req.body.content;
 
-  if (
-    !enteredTitle ||
-    !enteredContent ||
-    enteredTitle.trim() === "" ||
-    enteredContent.trim() === ""
-  ) {
-    validationSession.flasErrorsToSession(
+  if (!validation.postIsValid(enteredTitle, enteredContent)) {
+    validationSession.flashErrorsToSession(
       req,
       // data
       {
