@@ -16,7 +16,7 @@ class Post {
 
   static async fetchAll() {
     const posts = await db.getDb().collection("posts").find().toArray();
-    return post;
+    return posts;
   }
 
   async fetch() {
