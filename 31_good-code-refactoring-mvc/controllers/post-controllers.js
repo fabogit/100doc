@@ -1,4 +1,5 @@
 const Post = require("../models/post");
+const validationSession = require("../util/validation-session");
 
 function getHome(req, res) {
   res.render("welcome", { csrfToken: req.csrfToken() });
@@ -12,21 +13,11 @@ async function getAdmin(req, res) {
   // calling static method, no need to new Post obj
   const posts = await Post.fetchAll();
 
-  let sessionInputData = req.session.inputData;
-
-  if (!sessionInputData) {
-    sessionInputData = {
-      hasError: false,
-      title: "",
-      content: "",
-    };
-  }
-
-  req.session.inputData = null;
+  const sessionErrorData = validationSession.getSessionErrorData(req);
 
   res.render("admin", {
     posts: posts,
-    inputData: sessionInputData,
+    inputData: sessionErrorData,
     csrfToken: req.csrfToken(),
   });
 }
@@ -66,21 +57,11 @@ async function getSinglePost(req, res) {
     return res.render("404"); // 404.ejs is missing at this point - it will be added later!
   }
 
-  let sessionInputData = req.session.inputData;
-
-  if (!sessionInputData) {
-    sessionInputData = {
-      hasError: false,
-      title: post.title,
-      content: post.content,
-    };
-  }
-
-  req.session.inputData = null;
+  const sessionErrorData = validationSession.getSessionErrorData(req);
 
   res.render("single-post", {
     post: post,
-    inputData: sessionInputData,
+    inputData: sessionErrorData,
     csrfToken: req.csrfToken(),
   });
 }
@@ -95,14 +76,19 @@ async function updatePost(req, res) {
     enteredTitle.trim() === "" ||
     enteredContent.trim() === ""
   ) {
-    req.session.inputData = {
-      hasError: true,
-      message: "Invalid input - please check your data.",
-      title: enteredTitle,
-      content: enteredContent,
-    };
-
-    res.redirect(`/posts/${req.params.id}/edit`);
+    validationSession.flasErrorsToSession(
+      req,
+      // data
+      {
+        message: "Invalid input - please check your data.",
+        title: enteredTitle,
+        content: enteredContent,
+      },
+      // action
+      function () {
+        res.redirect(`/posts/${req.params.id}/edit`);
+      }
+    );
     return;
   }
 
