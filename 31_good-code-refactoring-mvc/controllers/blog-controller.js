@@ -54,12 +54,23 @@ async function createPost(req, res) {
   res.redirect("/admin");
 }
 
-async function getSinglePost(req, res) {
-  const post = new Post(null, null, req.params.id);
+async function getSinglePost(req, res, next) {
+  // manage async errors
+  let post;
+  try {
+    post = new Post(null, null, req.params.id);
+    
+  } catch (error) {
+    // pass errors and stop exec
+    // return next(error)
+    // or manually render 404
+    return res.render("404");
+  }
+
   await post.fetch();
 
   if (!post.title || !post.content) {
-    return res.render("404"); // 404.ejs is missing at this point - it will be added later!
+    return res.render("404");
   }
 
   const sessionErrorData = validationSession.getSessionErrorData(req, {
