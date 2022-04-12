@@ -7,10 +7,6 @@ function getHome(req, res) {
 }
 
 async function getAdmin(req, res) {
-  if (!res.locals.isAuth) {
-    return res.status(401).render("401");
-  }
-
   // calling static method, no need to new Post obj
   const posts = await Post.fetchAll();
 
@@ -59,7 +55,6 @@ async function getSinglePost(req, res, next) {
   let post;
   try {
     post = new Post(null, null, req.params.id);
-    
   } catch (error) {
     // pass errors and stop exec
     // return next(error)
