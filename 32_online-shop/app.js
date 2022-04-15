@@ -3,12 +3,16 @@ const path = require('path');
 const express = require('express');
 
 const authRoutes = require('./routes/auth.routes');
+const { use } = require('./routes/auth.routes');
 
 const app = express();
 
 // EJS & views folder
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+// enable static files
+app.use(express.static('public'))
 
 app.use(authRoutes);
 

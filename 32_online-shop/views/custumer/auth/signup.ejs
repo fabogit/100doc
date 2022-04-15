@@ -1,4 +1,6 @@
 <%- include('../includes/head', { pageTitle: 'Signup'}) %>
+  <link rel="stylesheet" href="/styles/forms.css"/>
+  <link rel="stylesheet" href="/styles/auth.css"/>
 </head>
 
 <body>
@@ -9,7 +11,7 @@
     <form action="" method="">
       <p>
         <label for="email">E-mail</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" required/>
       </p>
       <p>
         <label for="confirm-email">Confirm E-mail</label>
@@ -18,7 +20,7 @@
           id="confirm-email"
           name="confirm-email"
           required
-        >
+        />
       </p>
       <p>
         <label for="password">Password</label>
@@ -28,7 +30,7 @@
           name="password"
           minlength="6"
           required
-        >
+        />
       </p>
       <hr>
       <p>
@@ -38,7 +40,7 @@
           id="fullname"
           name="fullname"
           required
-        >
+        />
       </p>
       <p>
         <label for="street">Street</label>
@@ -47,7 +49,7 @@
           id="street"
           name="street"
           required
-        >
+        />
       </p>
       <p>
         <label for="postal">Postal Code</label>
@@ -58,7 +60,7 @@
           minlength="5"
           maxlength="5"
           required
-        >
+        />
       </p>
       <p>
         <label for="city">City</label>
@@ -67,7 +69,7 @@
           id="city"
           name="city"
           required
-        >
+        />
       </p>
       <button class="btn">Create Account</button>
       <p id="switch-form"><a href="/login">Login instead</a></p>
