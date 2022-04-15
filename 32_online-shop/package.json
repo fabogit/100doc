@@ -9,11 +9,12 @@
   },
   "author": "fabo",
   "license": "MIT",
-  "devDependencies": {
-    "nodemon": "^2.0.15"
-  },
   "dependencies": {
     "ejs": "^3.0.2",
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "mongodb": "^4.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }

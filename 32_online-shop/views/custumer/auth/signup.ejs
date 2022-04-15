@@ -8,7 +8,8 @@
   <%- include('../includes/header') %> 
   <main>
     <h1>Create New Account</h1>
-    <form action="" method="">
+    <!-- submit the form (payload in req.body) to the router -->
+    <form action="/signup" method="POST">
       <p>
         <label for="email">E-mail</label>
         <input type="email" id="email" name="email" required/>
