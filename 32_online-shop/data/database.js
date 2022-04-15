@@ -5,6 +5,7 @@ const MongoClient = mongodb.MongoClient;
 const host = '127.0.0.1';
 const port = '27017';
 const dbName = 'online-shop';
+const userCollectionName = 'users';
 let database;
 
 async function mongoClientConnect(host, port, dbName) {
@@ -33,6 +34,7 @@ module.exports = {
   host: host,
   port: port,
   dbName: dbName,
+  userCollection: userCollectionName,
   connectToDb: mongoClientConnect,
   getDb: checkDbConnection
 };

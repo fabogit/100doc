@@ -13,6 +13,8 @@ app.set('views', path.join(__dirname, 'views'));
 
 // enable static files
 app.use(express.static('public'));
+// allow to extract request data from incoming form submissions
+app.use(express.urlencoded({ extended: false }));
 
 app.use(authRoutes);
 
