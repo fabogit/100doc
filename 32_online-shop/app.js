@@ -5,6 +5,7 @@ const csrf = require('csurf');
 
 const db = require('./data/database');
 const addCsrfTokenMiddleware = require('./middlewares/csrf-token');
+const errorHandlerMiddleware = require('./middlewares/error-handler');
 const authRoutes = require('./routes/auth.routes');
 
 const app = express();
@@ -23,6 +24,9 @@ app.use(addCsrfTokenMiddleware);
 
 // routes
 app.use(authRoutes);
+
+// error handling mdlwr
+app.use(errorHandlerMiddleware);
 
 // Start an IIFE to use `await` at the top level
 (async () => {

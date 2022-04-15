@@ -1,11 +1,11 @@
-<%- include('../includes/head', { pageTitle: 'Signup'}) %>
+<%- include('../../shared/includes/head', { pageTitle: 'Signup'}) %>
   <link rel="stylesheet" href="/styles/forms.css"/>
   <link rel="stylesheet" href="/styles/auth.css"/>
 </head>
 
 <body>
 
-  <%- include('../includes/header') %> 
+  <%- include('../../shared/includes/header') %> 
   <main>
     <h1>Create New Account</h1>
     <!-- submit the form (payload in req.body) to the router -->
@@ -78,4 +78,4 @@
       <p id="switch-form"><a href="/login">Login instead</a></p>
     </form>
   </main>
-<%- include('../includes/footer') %> 
+<%- include('../../shared/footer') %> 
