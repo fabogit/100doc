@@ -1,4 +1,3 @@
-const { StreamDescription } = require('mongodb');
 const User = require('../models/user.model');
 
 // render page

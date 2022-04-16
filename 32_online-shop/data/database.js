@@ -1,21 +1,19 @@
 const mongodb = require('mongodb');
 
+const cnf = require('../config/config')
+
 const MongoClient = mongodb.MongoClient;
 
-const host = '127.0.0.1';
-const port = '27017';
-const dbName = 'online-shop';
-const userCollectionName = 'users';
 let database;
+const databaseName = cnf.mongo.dbName
 
-async function mongoClientConnect(host, port, dbName) {
+async function mongoClientConnect(uri) {
   try {
     // connect to the mongodb server
-    const uri = `mongodb://${host}:${port}`;
     const client = await MongoClient.connect(uri);
     // connect to the database
-    database = client.db(dbName);
-    console.log(`\u2705 MongoDB \u2192 ${uri}/${dbName}`);
+    database = client.db(databaseName);
+    console.log(`\u2705 MongoDB \u2192 ${uri}/${databaseName}`);
   } catch (error) {
     console.log(`\u274C MongoDB \u2192 ${error.message}`);
   }
@@ -31,10 +29,6 @@ function checkDbConnection() {
 }
 
 module.exports = {
-  host: host,
-  port: port,
-  dbName: dbName,
-  userCollection: userCollectionName,
   connectToDb: mongoClientConnect,
   getDb: checkDbConnection
 };

@@ -19,8 +19,7 @@ class User {
 
     await db.getDb().collection(db.userCollection).insertOne({
       email: this.email,
-      password: hashedPassword, // this.password, // TODO HASH
-      name: this.name,
+      password: hashedPassword, // this.password,
       address: this.address
     });
   }
