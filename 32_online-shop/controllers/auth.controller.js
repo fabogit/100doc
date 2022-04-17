@@ -7,7 +7,7 @@ function getSignup(req, res) {
 }
 
 // handle submission form & create user
-async function signup(req, res) {
+async function signup(req, res, next) {
   const user = new User(
     req.body.email,
     req.body.password,
@@ -17,7 +17,13 @@ async function signup(req, res) {
     req.body.city
   );
 
-  await user.signup();
+  try {
+    await user.signup();
+  } catch (error) {
+    // pass error to default error handler
+    next(error);
+    return;
+  }
   // redirect to login page after user is stored into db
   res.redirect('/login');
 }
@@ -26,9 +32,17 @@ function getLogin(req, res) {
   res.render('customer/auth/login');
 }
 
-async function login(req, res) {
+async function login(req, res, next) {
   const user = new User(req.body.email, req.body.password);
-  const existingUser = await user.getUserWithSameMail();
+  // allow scope inside the try/catch block
+  let existingUser;
+  try {
+    existingUser = await user.getUserWithSameMail();
+  } catch (error) {
+    // pass error to default error handler
+    next(error);
+    return;
+  }
 
   if (!existingUser) {
     res.redirect('/login');
