@@ -1,11 +1,11 @@
 const mongodb = require('mongodb');
 
-const cnf = require('../config/config')
+const { mongo } = require('../config/config');
 
 const MongoClient = mongodb.MongoClient;
 
 let database;
-const databaseName = cnf.mongo.dbName
+const databaseName = mongo.dbName;
 
 async function mongoClientConnect(uri) {
   try {
@@ -13,18 +13,18 @@ async function mongoClientConnect(uri) {
     const client = await MongoClient.connect(uri);
     // connect to the database
     database = client.db(databaseName);
-    console.log(`\u2705 MongoDB \u2192 ${uri}/${databaseName}`);
+    console.log(`✅ MongoDB → 🔌 ${uri}/${databaseName}`);
   } catch (error) {
-    console.log(`\u274C MongoDB \u2192 ${error.message}`);
+    console.log(`❌ MongoDB → ${error.message}`);
   }
   // no return, yeld a promise
 }
 
 function checkDbConnection() {
   if (!database) {
-    throw new Error('\u274C No database connection');
+    throw new Error('❌ No database connection');
   }
-  console.log(`\u2705 Connected to database: ${database.databaseName}`);
+  console.log(`📨 Connected to database: ${database.databaseName}`);
   return database;
 }
 

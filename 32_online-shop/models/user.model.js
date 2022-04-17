@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 
 const db = require('../data/database');
+const { mongo } = require('../config/config');
 
 class User {
   constructor(email, password, fullname, street, postal, city) {
@@ -17,12 +18,26 @@ class User {
   async signup() {
     const hashedPassword = await bcrypt.hash(this.password, 12);
 
-    await db.getDb().collection(db.userCollection).insertOne({
+    await db.getDb().collection(mongo.collectionUsers).insertOne({
       email: this.email,
       password: hashedPassword, // this.password,
       address: this.address
     });
   }
+
+  // get user of entered email
+  getUserWithSameMail() {
+    // return findOne promise, no need to async/await
+    return db.getDb().collection(mongo.collectionUsers).findOne({
+      email: this.email
+    });
+  }
+
+  // check if entered password is valid
+  hasMatchingPassword(hashedPassword) {
+    return bcrypt.compare(this.password, hashedPassword);
+  }
+
 }
 
 module.exports = User;

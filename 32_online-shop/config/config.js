@@ -6,14 +6,14 @@ const nodeServer = {
 const mongoDb = {
   uri: process.env.mongoDb_uriLocalhost || process.env.mongoDb_uriCloud,
   dbName: process.env.mongoDb_databaseName,
-  collectionUser: process.env.mongoDb_collectionUser,
-  collectionSession: process.env.mongoDb_collectionSession
+  collectionUsers: process.env.mongoDb_collectionUsers,
+  collectionSessions: process.env.mongoDb_collectionSessions
 };
 
 const sessionConfig = {
   uri: mongoDb.uri,
   dbName: mongoDb.dbName,
-  collection: mongoDb.collectionSession,
+  collection: mongoDb.collectionSessions,
   secret: process.env.session_secretKey
 };
 

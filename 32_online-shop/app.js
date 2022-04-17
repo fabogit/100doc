@@ -5,12 +5,14 @@ const express = require('express');
 const expressSession = require('express-session');
 const csrf = require('csurf');
 
-const cfg = require('./config/config');
+const { node, mongo } = require('./config/config');
 const createSessionConfig = require('./config/session');
 const db = require('./data/database');
 const addCsrfTokenMiddleware = require('./middlewares/csrf-token');
 const errorHandlerMiddleware = require('./middlewares/error-handler');
 const authRoutes = require('./routes/auth.routes');
+const baseRoutes = require('./routes/base.routes');
+const productsRoutes = require('./routes/products.routes');
 
 const app = express();
 
@@ -30,7 +32,9 @@ app.use(csrf());
 app.use(addCsrfTokenMiddleware);
 
 // routes
+app.use(baseRoutes);
 app.use(authRoutes);
+app.use(productsRoutes);
 
 // error handling
 app.use(errorHandlerMiddleware);
@@ -39,15 +43,15 @@ app.use(errorHandlerMiddleware);
 (async () => {
   try {
     // connect db & run server
-    await db.connectToDb(cfg.mongo.uri);
-    const nodePort = cfg.node.port;
-    const nodeHost = cfg.node.host;
+    await db.connectToDb(mongo.uri);
+    const nodePort = node.port;
+    const nodeHost = node.host;
     const server = app.listen(nodePort, nodeHost, () => {
       console.log(
-        `\u2705 NodeJS  \u2192 Running on ${nodeHost}:${server.address().port}`
+        `✅ NodeJS  → 💻 @${nodeHost}:${server.address().port}`
       );
     });
   } catch (error) {
-    console.log(`\u274C ERROR \u2192 ${error}`);
+    console.log(`❌ ERROR → ${error}`);
   }
 })();

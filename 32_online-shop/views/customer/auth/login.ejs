@@ -9,7 +9,7 @@
   <main>
     <h1>Login</h1>
     <!-- submit the form (payload in req.body) to the router -->
-    <form action="/signup" method="POST">
+    <form action="/login" method="POST">
       <!-- send csrf token name="_csrf"  -->
       <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>"/>
       <p>
