@@ -10,6 +10,7 @@ const createSessionConfig = require('./config/session');
 const db = require('./data/database');
 const addCsrfTokenMiddleware = require('./middlewares/csrf-token');
 const errorHandlerMiddleware = require('./middlewares/error-handler');
+const checkAuthStatusMiddleware = require('./middlewares/check-auth');
 const authRoutes = require('./routes/auth.routes');
 const baseRoutes = require('./routes/base.routes');
 const productsRoutes = require('./routes/products.routes');
@@ -23,10 +24,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public'));
 // allow to extract request data from incoming form submissions
 app.use(express.urlencoded({ extended: false }));
-// enable session before csrf
+// enable session
 const sessionConfig = createSessionConfig();
 app.use(expressSession(sessionConfig));
-// enable csurf, generate csrf token and check all requests (not GET) for it
+app.use(checkAuthStatusMiddleware)
+// enable csurf after session, generate csrf token and check all requests (not GET) for it
 app.use(csrf());
 // set token to res.locals.csrfToken
 app.use(addCsrfTokenMiddleware);

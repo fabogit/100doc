@@ -23,7 +23,7 @@ async function signup(req, res) {
 }
 
 function getLogin(req, res) {
-  res.render('custumer/auth/login');
+  res.render('customer/auth/login');
 }
 
 async function login(req, res) {
