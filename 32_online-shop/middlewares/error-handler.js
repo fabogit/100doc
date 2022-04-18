@@ -1,6 +1,6 @@
 // express error handler middleware
 function handleErrors(error, req, res, next) {
-  console.log(error);
+  console.log(` ERROR → ${error}`);
   res.status(500).render('shared/500');
 }
 

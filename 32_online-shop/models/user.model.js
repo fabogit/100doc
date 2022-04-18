@@ -33,6 +33,15 @@ class User {
     });
   }
 
+  // check if email is stored, user already created
+  async existsAlready() {
+    const existingUser = await this.getUserWithSameMail();
+    if (existingUser) {
+      return true;
+    }
+    return false;
+  }
+
   // check if entered password is valid
   hasMatchingPassword(hashedPassword) {
     return bcrypt.compare(this.password, hashedPassword);

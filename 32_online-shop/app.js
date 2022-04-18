@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 // enable session
 const sessionConfig = createSessionConfig();
 app.use(expressSession(sessionConfig));
-app.use(checkAuthStatusMiddleware)
+app.use(checkAuthStatusMiddleware);
 // enable csurf after session, generate csrf token and check all requests (not GET) for it
 app.use(csrf());
 // set token to res.locals.csrfToken
@@ -50,10 +50,10 @@ app.use(errorHandlerMiddleware);
     const nodeHost = node.host;
     const server = app.listen(nodePort, nodeHost, () => {
       console.log(
-        `✅ NodeJS  → 💻 @${nodeHost}:${server.address().port}`
+        ` NodeJS  →  @${nodeHost}:${server.address().port}`
       );
     });
   } catch (error) {
-    console.log(`❌ ERROR → ${error}`);
+    console.log(` ERROR → ${error}`);
   }
 })();

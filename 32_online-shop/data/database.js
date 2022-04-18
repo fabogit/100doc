@@ -13,18 +13,18 @@ async function mongoClientConnect(uri) {
     const client = await MongoClient.connect(uri);
     // connect to the database
     database = client.db(databaseName);
-    console.log(`✅ MongoDB → 🔌 ${uri}/${databaseName}`);
+    console.log(` MongoDB →  ${uri}/${databaseName}`);
   } catch (error) {
-    console.log(`❌ MongoDB → ${error.message}`);
+    console.log(` MongoDB → ${error.message}`);
   }
   // no return, yeld a promise
 }
 
 function checkDbConnection() {
   if (!database) {
-    throw new Error('❌ No database connection');
+    throw new Error(' No database connection');
   }
-  console.log(`📨 Connected to database: ${database.databaseName}`);
+  console.log(` Connected to database: ${database.databaseName}`);
   return database;
 }
 
