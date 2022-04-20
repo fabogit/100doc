@@ -1,9 +1,3 @@
-function flashDataToSession(req, data, action) {
-  // get data from req and perform action callback after session is saved
-  req.session.flashedData = data;
-  req.session.save(action);
-}
-
 function getSessionData(req) {
   // clear the session flashedData
   const sessionData = req.session.flashedData;
@@ -11,7 +5,13 @@ function getSessionData(req) {
   return sessionData;
 }
 
+function flashDataToSession(req, data, action) {
+  // set session data and perform action callback after session is saved
+  req.session.flashedData = data;
+  req.session.save(action);
+}
+
 module.exports = {
-  flashDataToSession: flashDataToSession,
-  getSessionData: getSessionData
+  getSessionData: getSessionData,
+  flashDataToSession: flashDataToSession
 };

@@ -8,13 +8,26 @@
   <%- include('../../shared/includes/header') %> 
   <main>
     <h1>Create New Account</h1>
+    <!-- show error message if entered data is invalid -->
+    <% if (inputData.errorMessage) { %>
+     <section class="alert">
+      <h2>Invalid Input</h2>
+      <p><%= inputData.errorMessage %></p>
+     </section>
+    <% } %>
     <!-- submit the form (payload in req.body) to the router -->
     <form action="/signup" method="POST">
       <!-- send csrf token name="_csrf"  -->
       <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>"/>
       <p>
         <label for="email">E-mail</label>
-        <input type="email" id="email" name="email" required/>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value="<%= inputData.email %>"
+          required
+        />
       </p>
       <p>
         <label for="confirm-email">Confirm E-mail</label>
@@ -22,6 +35,7 @@
           type="email"
           id="confirm-email"
           name="confirm-email"
+          value="<%= inputData.confirmEmail %>"
           required
         />
       </p>
@@ -32,6 +46,7 @@
           id="password"
           name="password"
           minlength="6"
+          value="<%= inputData.password %>"
           required
         />
       </p>
@@ -42,6 +57,7 @@
           id="confirm-password"
           name="confirm-password"
           minlength="6"
+          value="<%= inputData.confirmPassword %>"
           required
         />
       </p>
@@ -52,6 +68,7 @@
           type="text"
           id="fullname"
           name="fullname"
+          value="<%= inputData.fullname %>"
           required
         />
       </p>
@@ -61,6 +78,7 @@
           type="text"
           id="street"
           name="street"
+          value="<%= inputData.street %>"
           required
         />
       </p>
@@ -72,6 +90,7 @@
           name="postal"
           minlength="5"
           maxlength="5"
+          value="<%= inputData.postal %>"
           required
         />
       </p>
@@ -81,6 +100,7 @@
           type="text"
           id="city"
           name="city"
+          value="<%= inputData.city %>"
           required
         />
       </p>
