@@ -4,6 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const expressSession = require('express-session');
 const csrf = require('csurf');
+var logger = require('morgan');
 
 const { node, mongo } = require('./config/config');
 const createSessionConfig = require('./config/session');
@@ -17,6 +18,7 @@ const productsRoutes = require('./routes/products.routes');
 
 const app = express();
 
+app.use(logger('dev'));
 // EJS & views folder
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -28,7 +30,8 @@ app.use(express.urlencoded({ extended: false }));
 const sessionConfig = createSessionConfig();
 app.use(expressSession(sessionConfig));
 app.use(checkAuthStatusMiddleware);
-// enable csurf after session, generate csrf token and check all requests (not GET) for it
+// enable csurf after session,
+// generate csrf token and check for it on all incoming requests (not for GET)
 app.use(csrf());
 // set token to res.locals.csrfToken
 app.use(addCsrfTokenMiddleware);

@@ -1,6 +1,7 @@
 const User = require('../models/user.model');
 const authUtil = require('../util/authentication');
 const validation = require('../util/validation');
+const sessionFlash = require('../util/session-flash');
 
 // render page
 function getSignup(req, res) {
@@ -9,6 +10,14 @@ function getSignup(req, res) {
 
 // handle submission form & create user
 async function signup(req, res, next) {
+  const enteredData = {
+    email: req.body.email,
+    password: req.body.password,
+    fullname: req.body.fullname,
+    street: req.body.street,
+    postal: req.body.postal,
+    city: req.body.city
+  };
   // validate data
   if (!validation.userDetailsAreValid(
     req.body.email,
@@ -17,9 +26,23 @@ async function signup(req, res, next) {
     req.body.street,
     req.body.postal,
     req.body.city
-  ) || !validation.emailIsConfirmed(req.body.email, req.body['confirm-email'])
+  ) || !validation.valueIsConfirmed(req.body.email, req.body['confirm-email'])
+    || !validation.valueIsConfirmed(req.body.password, req.body['confirm-password'])
   ) {
-    res.redirect('/signup');
+    // invalid data, store data to session and redirect
+    sessionFlash.flashDataToSession(
+      req,
+      // data
+      {
+        errorMessage: 'Please check your input. Password must be at least 6 charachters long, postal code must be 5 charachters long',
+        ...enteredData
+      },
+      // callback action
+      () => {
+        res.redirect('/signup');
+      }
+    );
+    return;
   }
   // data is valid create new User
   const user = new User(
@@ -32,10 +55,21 @@ async function signup(req, res, next) {
   );
 
   try {
-    // already exists, redirect to signup (or login)
+    // already exists, store to session and redirect to signup
     const existsAlready = await user.existsAlready();
     if (existsAlready) {
-      res.redirect('/signup');
+      sessionFlash.flashDataToSession(
+        req,
+        // data
+        {
+          errorMessage: 'E-mail already in use, user exist already, try logging in instead!',
+          ...enteredData
+        },
+        // callback action
+        () => {
+          res.redirect('/signup');
+        }
+      );
       return;
     }
     // create user
@@ -65,15 +99,25 @@ async function login(req, res, next) {
     return;
   }
 
+  const sessionErrorData = {
+    errorMessage: 'Invalid credentials - please check inserted email and password',
+    email: user.email,
+    password: user.password
+  };
+
   if (!existingUser) {
-    res.redirect('/login');
+    sessionFlash.flashDataToSession(req, sessionErrorData, () => {
+      res.redirect('/login');
+    });
     return;
   }
 
   const passwordIsCorrect = await user.hasMatchingPassword(existingUser.password);
 
   if (!passwordIsCorrect) {
-    res.redirect('/login');
+    sessionFlash.flashDataToSession(req, sessionErrorData, () => {
+      res.redirect('/login');
+    });
     return;
   }
 
