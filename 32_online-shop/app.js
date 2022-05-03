@@ -53,10 +53,10 @@ app.use(errorHandlerMiddleware);
     const nodeHost = node.host;
     const server = app.listen(nodePort, nodeHost, () => {
       console.log(
-        ` NodeJS  →  @${nodeHost}:${server.address().port}`
+        ` NodeJS  →  @${nodeHost}:${server.address().port}`
       );
     });
   } catch (error) {
-    console.log(` ERROR → ${error}`);
+    console.log(` ERROR →  ${error}`);
   }
 })();

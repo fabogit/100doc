@@ -36,7 +36,7 @@ async function signup(req, res, next) {
     postal: req.body.postal,
     city: req.body.city
   };
-  console.log(enteredData);
+  // ! console.log(enteredData);
   
   // validate data
   if (!validation.userDetailsAreValid(
