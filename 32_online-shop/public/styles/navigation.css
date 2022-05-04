@@ -141,6 +141,10 @@ main {
     display: none;
   }
 
+  #mobile-menu.open {
+    display: none;
+  }
+
   .nav-items {
     flex-direction: row;
   }
