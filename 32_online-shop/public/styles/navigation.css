@@ -84,10 +84,15 @@ main {
   height: calc(100vh - 5rem);
   width: 100%;
   background-color: var(--color-gray-700);
+  /* hide by default, show when btn is clicked */
+  display: none;
   /* centering horizzontally */
-  display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#mobile-menu.open {
+  display: flex;
 }
 
 #mobile-menu nav {
@@ -132,6 +137,7 @@ main {
   }
 
   #mobile-menu {
+    /* always hide on bigger screen */
     display: none;
   }
 
