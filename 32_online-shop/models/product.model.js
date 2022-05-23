@@ -10,8 +10,7 @@ class Product {
 		this.price = +productData.price; //force number
 		this.description = productData.description;
 		this.image = productData.image; // name of image file
-		this.imagePath = `product-data/images/${productData.image}`;
-		this.imageUrl = `/products/assets/images/${productData.image}`;
+		this.updateImageData();
 		if (productData._id) {
 			this.id = productData._id.toString();
 		}
@@ -34,7 +33,7 @@ class Product {
 			error.code = 404;
 			throw error;
 		}
-		return product;
+		return new Product(product);
 	}
 
 	static async findAll() {
@@ -48,6 +47,11 @@ class Product {
 		});
 	}
 
+	updateImageData(){
+		this.imagePath = `product-data/images/${this.image}`;
+		this.imageUrl = `/products/assets/images/${this.image}`;
+	}
+
 	async save() {
 		const productData = {
 			title: this.title,
@@ -56,10 +60,27 @@ class Product {
 			description: this.description,
 			image: this.image
 		};
+		// save || update (if id present)
+		if (this.id) {
+			const productId = new mongodb.ObjectId(this.id);
+			if (!this.image) {
+				// no new image from user or old present in the db
+				// delete to avoid overwrite the value with undefined
+				delete productData.image;
+			}
+			await db.getDb()
+				.collection(mongo.collectionProducts)
+				.updateOne({_id: productId}, {$set: productData});
+		}else{
+			await db.getDb()
+				.collection(mongo.collectionProducts)
+				.insertOne(productData);
+		}
+	}
 
-		await db.getDb()
-			.collection(mongo.collectionProducts)
-			.insertOne(productData);
+	replaceImage(newImage){
+		this.image = newImage;
+		this.updateImageData();
 	}
 }
 
