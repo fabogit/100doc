@@ -1,21 +1,21 @@
 form hr {
-  border-color: var(--color-primary-200);
-  margin: var(--space-4);
+	border-color: var(--color-primary-200);
+	margin: var(--space-4);
 }
 
 label {
-  color: var(--color-grey-100);
-  /* force line break changing default inline style to block */
-  display: block;
-  margin-bottom: var(--space-2);
+	color: var(--color-grey-100);
+	/* force line break changing default inline style to block */
+	display: block;
+	margin-bottom: var(--space-2);
 }
 
 input,
 textarea {
-  /* override browser default font */
-  font: inherit;
-  padding: var(--space-2);
-  border-radius: var(--border-radius-small);
-  border: none;
-  width: 90%;
+	/* override browser default font */
+	font: inherit;
+	padding: var(--space-2);
+	border-radius: var(--border-radius-small);
+	border: none;
+	width: 90%;
 }

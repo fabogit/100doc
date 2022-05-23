@@ -8,27 +8,27 @@ let database;
 const databaseName = mongo.dbName;
 
 async function mongoClientConnect(uri) {
-  try {
-    // connect to the mongodb server
-    const client = await MongoClient.connect(uri);
-    // connect to the database
-    database = client.db(databaseName);
-    console.log(` MongoDB →  ${uri}/${databaseName}`);
-  } catch (error) {
-    console.log(` MongoDB → ${error.message}`);
-  }
-  // no return, yeld a promise
+	try {
+		// connect to the mongodb server
+		const client = await MongoClient.connect(uri);
+		// connect to the database
+		database = client.db(databaseName);
+		console.log(` MongoDB →  ${uri}/${databaseName}`);
+	} catch (error) {
+		console.log(` MongoDB → ${error.message}`);
+	}
+	// no return, yeld a promise
 }
 
 function checkDbConnection() {
-  if (!database) {
-    throw new Error(' No database connection');
-  }
-  console.log(` CRUD on  : ${database.databaseName}`);
-  return database;
+	if (!database) {
+		throw new Error(' No database connection');
+	}
+	console.log(` CRUD on  : ${database.databaseName}`);
+	return database;
 }
 
 module.exports = {
-  connectToDb: mongoClientConnect,
-  getDb: checkDbConnection
+	connectToDb: mongoClientConnect,
+	getDb: checkDbConnection
 };
