@@ -1,0 +1,45 @@
+#products-grid {
+	margin: var(--space-8) auto;
+	/* force layout grid on childs of products-grid */
+	display: grid;
+	/* repeat() will repeat settings for multiple columns
+  auto-fill choose columns number based on available screen width,
+  1fr at maximum will put as many column as possible in the screen
+  width for the given row, where all columns will have the same width(1fr) */
+	grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+	/* spacing between columns and rows */
+	gap: var(--space-4);
+}
+
+.product-item {
+	border-radius: var(--border-radius-medium);
+	text-align: center;
+	background-color: var(--color-gray-600);
+	/* enforce rounded corners on items inside this element */
+	overflow: hidden;
+}
+
+.product-item img {
+	width: 100%;
+	height: 10rem;
+	/* use contain instead of cover to have a small image */
+	object-fit: cover;
+}
+
+.product-item-content {
+	padding: var(--space-4);
+}
+
+.product-item-content h2 {
+	font-size: 1.15rem;
+	margin: var(--space-2) 0;
+}
+
+.product-item-actions {
+	/* align childs on same row */
+	display: flex;
+	/* center on same row */
+	justify-content: space-evenly;
+	gap: var(--space-2);
+	margin: var(--space-4);
+}
