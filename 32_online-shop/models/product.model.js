@@ -52,6 +52,11 @@ class Product {
 		this.imageUrl = `/products/assets/images/${this.image}`;
 	}
 
+	replaceImage(newImage){
+		this.image = newImage;
+		this.updateImageData();
+	}
+
 	async save() {
 		const productData = {
 			title: this.title,
@@ -78,9 +83,12 @@ class Product {
 		}
 	}
 
-	replaceImage(newImage){
-		this.image = newImage;
-		this.updateImageData();
+	remove(){
+		const productId = new mongodb.ObjectId(this.id);
+		// return a promise, async/await when invoked
+		return db.getDb()
+			.collection(mongo.collectionProducts)
+			.deleteOne({_id: productId});
 	}
 }
 
