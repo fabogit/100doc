@@ -1,5 +1,5 @@
 const nodeServer = {
-	host: process.env.nodeServer_host,
+	host: process.env.nodeServer_host || HOST,
 	port: process.env.PORT || process.env.nodeServer_port
 };
 

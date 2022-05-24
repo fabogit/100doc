@@ -1,5 +1,6 @@
 <%- include('../../shared/includes/head', { pageTitle: 'All Products' }) %>
 <link rel="stylesheet" href="/styles/products.css">
+<script src="/scripts/product-management.js" defer></script>
 </head>
 
 <body>
@@ -8,7 +9,9 @@
     <h1>Product Administration</h1>
     <section>
       <h2>Manage Products</h2>
-      <p><a href="/admin/products/new" class="btn">Add Product</a></p>
+      <p>
+				<a href="/admin/products/new" class="btn">Add Product</a>
+			</p>
     </section>
     <section>
       <ul id="products-grid">
