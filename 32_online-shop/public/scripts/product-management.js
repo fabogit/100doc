@@ -10,7 +10,7 @@ async function deleteProduct(event) {
 	// const domain = `${node.host}:${node.port}`;
 	const ajaxUrl = `/admin/products/${productId}?_csrf=${csrfToken}`;
 	const response = await fetch(ajaxUrl, {method: 'DELETE'});
-	console.log(response);
+	// console.log(response);
 	if (!response.ok) {
 		alert('Something went wrong!');
 		return;
