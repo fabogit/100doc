@@ -13,6 +13,7 @@ const addCsrfTokenMiddleware = require('./middlewares/csrf-token');
 const errorHandlerMiddleware = require('./middlewares/error-handler');
 const checkAuthStatusMiddleware = require('./middlewares/check-auth');
 const protectRoutesMiddleware = require('./middlewares/protect-routes');
+const cartMiddleware = require('./middlewares/cart');
 const authRoutes = require('./routes/auth.routes');
 const baseRoutes = require('./routes/base.routes');
 const productsRoutes = require('./routes/products.routes');
@@ -38,6 +39,8 @@ app.use(checkAuthStatusMiddleware);
 app.use(csrf());
 // set token to res.locals.csrfToken
 app.use(addCsrfTokenMiddleware);
+// cart session
+app.use(cartMiddleware);
 
 // routes
 app.use(baseRoutes);
