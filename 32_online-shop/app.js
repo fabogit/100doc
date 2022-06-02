@@ -18,6 +18,7 @@ const authRoutes = require('./routes/auth.routes');
 const baseRoutes = require('./routes/base.routes');
 const productsRoutes = require('./routes/products.routes');
 const adminRoutes = require('./routes/admin.routes');
+const cartRoutes = require('./routes/cart.routes');
 
 const app = express();
 
@@ -30,6 +31,8 @@ app.use(express.static('public'));
 app.use('/products/assets', express.static('product-data'));
 // allow to extract request data from incoming form submissions
 app.use(express.urlencoded({ extended: false }));
+// allow to parse JSON from ajax request
+app.use(express.json());
 // enable session
 const sessionConfig = createSessionConfig();
 app.use(expressSession(sessionConfig));
@@ -46,6 +49,7 @@ app.use(cartMiddleware);
 app.use(baseRoutes);
 app.use(authRoutes);
 app.use(productsRoutes);
+app.use('/cart', cartRoutes);
 // auth routes
 app.use(protectRoutesMiddleware);
 app.use('/admin', adminRoutes);

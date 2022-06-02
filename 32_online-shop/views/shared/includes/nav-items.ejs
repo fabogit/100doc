@@ -2,7 +2,9 @@
   <!-- nav links based on user type loggedin/unlogged/admin -->
   <% if (!locals.isAdmin) { %>
   <li><a href="/">Shop</a></li>
-  <li><a href="/cart">Cart <span class="badge"><%= locals.cart.totalQuantity %></span> </a></li>
+  <li>
+		<a href="/cart">Cart <span class="badge"><%= locals.cart.totalQuantity %></span></a>
+	</li>
   <% } %>
 
   <% if (locals.isAuth && !locals.isAdmin) { %>
@@ -21,7 +23,7 @@
 
   <% if (locals.isAuth) { %>
   <li>
-    <!-- change session isAuth -->
+    <!-- csrf hidden input & change session isAuth -->
     <form action="/logout" method="POST">
       <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
       <button>Logout</button>
