@@ -1,11 +1,11 @@
 <ul class="nav-items">
   <!-- nav links based on user type loggedin/unlogged/admin -->
-  <% if (!locals.isAdmin) { %> 
+  <% if (!locals.isAdmin) { %>
   <li><a href="/">Shop</a></li>
-  <li><a href="/cart">Cart</a></li>
+  <li><a href="/cart">Cart <span class="badge"><%= locals.cart.totalQuantity %></span> </a></li>
   <% } %>
 
-  <% if (locals.isAuth && !locals.isAdmin) { %> 
+  <% if (locals.isAuth && !locals.isAdmin) { %>
     <li><a href="/orders">Orders</a></li>
   <% } %>
 
@@ -19,7 +19,7 @@
     <li><a href="/login">Login</a></li>
   <% } %>
 
-  <% if (locals.isAuth) { %> 
+  <% if (locals.isAuth) { %>
   <li>
     <!-- change session isAuth -->
     <form action="/logout" method="POST">
@@ -27,5 +27,5 @@
       <button>Logout</button>
     </form>
   </li>
-  <% } %> 
+  <% } %>
 </ul>

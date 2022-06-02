@@ -1,6 +1,8 @@
 class Cart{
-	constructor(items = []){
+	constructor(items = [], totalQuantity = 0, totalPrice = 0){
 		this.items = items;
+		this.totalQuantity = totalQuantity;
+		this.totalPrice = totalPrice;
 	}
 
 	// store cart items to session
@@ -11,17 +13,22 @@ class Cart{
 			totalPrice: product.price
 		};
 
-		// add item to cart or if already in cart update quantity
+		// add item to cart, if already in cart update quantity and price
 		for (let index = 0; index < this.items.length; index++) {
 			const item = this.items[index];
 			if (item.product.id === product.id) {
 				cartItem.quantity = item.quantity + 1;
 				cartItem.totalPrice = item.totalPrice + product.price;
 				this.items[index] = cartItem;
+
+				this.totalQuantity ++;
+				this.totalPrice += product.price;
 				return;
 			}
 		}
-		this.items.push(product);
+		this.items.push(cartItem);
+		this.totalQuantity ++;
+		this.totalPrice += product.price;
 	}
 }
 
