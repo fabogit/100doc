@@ -6,8 +6,13 @@
 		</p>
   </div>
 
-  <div class="cart-item-management">
-    <input type="number" value="<%= item.quantity %>" required>
-    <button class="btn btn-alt">Update</button>
-  </div>
+	<!-- handle the patch ajax request on submit -->
+  <form
+		class="cart-item-management"
+		data-productid="<%= item.product.id %>"
+		data-csrf="<%= locals.csrfToken %>"
+		>
+		<input type="number" value="<%= item.quantity %>" required>
+   	<button class="btn btn-alt">Update</button>
+  </form>
 </article>
