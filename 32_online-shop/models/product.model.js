@@ -7,7 +7,8 @@ class Product {
 	constructor(productData) {
 		this.title = productData.title;
 		this.summary = productData.summary;
-		this.price = +productData.price; //force number
+		// force string to number => parseFloat() || +productData.price
+		this.price = parseFloat(productData.price);
 		this.description = productData.description;
 		this.image = productData.image; // name of image file
 		this.updateImageData();
@@ -48,7 +49,7 @@ class Product {
 	}
 
 	updateImageData(){
-		this.imagePath = `product-data/images/${this.image}`;
+		this.imagePath = `/product-data/images/${this.image}`;
 		this.imageUrl = `/products/assets/images/${this.image}`;
 	}
 

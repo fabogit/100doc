@@ -4,7 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const expressSession = require('express-session');
 const csrf = require('csurf');
-var logger = require('morgan');
+const logger = require('morgan');
 
 const { node, mongo } = require('./config/config');
 const createSessionConfig = require('./config/session');
