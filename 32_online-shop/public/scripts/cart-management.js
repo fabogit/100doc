@@ -1,5 +1,5 @@
 const addToCartButtonElement = document.querySelector('#product-details button');
-const cartBadgeElement = document.querySelector('.nav-items .badge');
+const cartBadgeElements = document.querySelectorAll('.nav-items .badge');
 
 async function addToCart() {
 	// button element data- attribute contains the product.id passed by ejs
@@ -32,7 +32,9 @@ async function addToCart() {
 	const responseData = await response.json();
 	const newTotalQuantity = responseData.newTotalItems;
 	// select badge item and update cart number
-	cartBadgeElement.textContent = newTotalQuantity;
+	for (const cartBadge of cartBadgeElements) {
+		cartBadge.textContent = newTotalQuantity;
+	}
 }
 
 addToCartButtonElement.addEventListener('click', addToCart);
