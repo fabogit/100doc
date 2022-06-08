@@ -40,12 +40,12 @@ class Cart {
 				const cartItem = {...item};
 				const quantityChange = parseInt(newQuantity) - parseInt(item.quantity);
 				cartItem.quantity = parseInt(newQuantity);
-				cartItem.totalPrice = parseInt(newQuantity) * parseFloat(product.price);
+				cartItem.totalPrice = parseInt(newQuantity) * parseFloat(item.product.price);
 				// update item
 				this.items[i] = cartItem;
 
 				this.totalQuantity = parseInt(this.totalQuantity) + parseInt(quantityChange);
-				this.totalPrice += parseInt(quantityChange) * parseFloat(product.price);
+				this.totalPrice += parseInt(quantityChange) * parseFloat(item.product.price);
 				return { updatedItemPrice: cartItem.totalPrice };
 			} else if(item.product.id === productId && newQuantity <= 0) {
 				// remove item from items & update
