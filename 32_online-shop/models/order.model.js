@@ -1,3 +1,6 @@
+const db = require('../data/database');
+const { mongo } = require('../config/config');
+
 class Order{
 	constructor(cart, userData, status = 'pending', date, orderId){
 		this.productData = cart;
@@ -14,6 +17,23 @@ class Order{
 			});
 		}
 		this.id = orderId;
+	}
+
+	save(){
+
+		if (this.id) {
+			// update order
+		} else {
+			// store new order to db
+			const orderDocument ={
+				userData: this.userData,
+				productData: this.productData,
+				date: new Date(),
+				status: this.status
+			};
+			return db.getDb().collection(mongo.collectionOrders).insertOne(orderDocument);
+
+		}
 	}
 }
 

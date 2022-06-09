@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const nodeServer = {
 	host: process.env.nodeServer_host || HOST,
 	port: process.env.PORT || process.env.nodeServer_port
@@ -8,6 +9,7 @@ const mongoDb = {
 	dbName: process.env.mongoDb_databaseName,
 	collectionUsers: process.env.mongoDb_collectionUsers,
 	collectionProducts: process.env.mongoDb_collectionProducts,
+	collectionOrders: process.env.mongoDb_collectionOrders,
 	collectionSessions: process.env.mongoDb_collectionSessions
 };
 

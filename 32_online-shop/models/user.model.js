@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const mongodb = require('mongodb');
 
 const db = require('../data/database');
 const { mongo } = require('../config/config');
@@ -25,6 +26,19 @@ class User {
 				password: hashedPassword, // this.password,
 				address: this.address
 			});
+	}
+
+	// get user w/out password
+	static findById(userId) {
+		const mongoUId = new mongodb.ObjectId(userId);
+		// return findOne promise, no need to async/await
+		return db.getDb()
+			.collection(mongo.collectionUsers)
+			.findOne(
+				{_id: mongoUId},
+				// dont retrive password
+				{ projection: {password: 0} }
+			);
 	}
 
 	// get user of entered email
