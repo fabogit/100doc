@@ -18,8 +18,8 @@ const sessionConfig = {
 	secret: process.env.session_secretKey
 };
 
-module.exports = {
+module.exports = Object.freeze({
 	node: nodeServer,
 	mongo: mongoDb,
 	session: sessionConfig
-};
+});
