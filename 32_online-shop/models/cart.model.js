@@ -1,3 +1,5 @@
+const Product = require('./product.model');
+
 class Cart {
 	constructor(items = [], totalQuantity = 0, totalPrice = 0) {
 		this.items = items;
@@ -54,6 +56,46 @@ class Cart {
 				this.totalPrice -= parseFloat(item.totalPrice);
 				return { updatedItemPrice: 0 };
 			}
+		}
+	}
+
+	async updatePrices() {
+		const productIds = this.items.map((item) => item.product.id);
+		const products = await Product.findMultiple(productIds);
+
+		// check if cart items are still available in the db, remove if not
+		const deletableCartItemProductIds = [];
+		for (const cartItem of this.items) {
+			// get up to date data of cart items
+			const product = products.find((prod) => prod.id === cartItem.product.id);
+
+			if (!product) {
+				// product was deleted!
+				// "schedule" for removal from cart and skip remaing loop code
+				deletableCartItemProductIds.push(cartItem.product.id);
+				continue;
+			}
+
+			// product was not deleted
+			// set product data and total price to latest price from database
+			cartItem.product = product;
+			cartItem.totalPrice = parseInt(cartItem.quantity) * parseFloat(cartItem.product.price);
+		}
+
+		if (deletableCartItemProductIds.length > 0) {
+			this.items = this.items.filter(function (item) {
+				// if index value exist in deletable array drop element[index]
+				return deletableCartItemProductIds.indexOf(item.product.id) < 0;
+			});
+		}
+
+		// reset and calculate cart totals
+		this.totalQuantity = 0;
+		this.totalPrice = 0;
+
+		for (const item of this.items) {
+			this.totalQuantity = parseInt(this.totalQuantity) + parseInt(item.quantity);
+			this.totalPrice = parseFloat(this.totalPrice) + parseFloat(item.totalPrice);
 		}
 	}
 }

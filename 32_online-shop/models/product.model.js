@@ -48,6 +48,23 @@ class Product {
 		});
 	}
 
+	static async findMultiple(ids) {
+		const productIds = ids.map(function(id) {
+			return new mongodb.ObjectId(id);
+		});
+
+		const products = await db
+			.getDb()
+			.collection(mongo.collectionProducts)
+			// id in ids[]
+			.find({ _id: { $in: productIds } })
+			.toArray();
+
+		return products.map(function (productDocument) {
+			return new Product(productDocument);
+		});
+	}
+
 	updateImageData(){
 		this.imagePath = `/product-data/images/${this.image}`;
 		this.imageUrl = `/products/assets/images/${this.image}`;
