@@ -1,6 +1,5 @@
 const cartItemUpdateFormElements = document.querySelectorAll('.cart-item-management');
 const cartTotalPriceElement = document.getElementById('cart-total-price');
-// cicle thru all querySelectorAll('badge') to update all desktop/mobile badges
 const cartBadgeElements = document.querySelectorAll('.nav-items .badge');
 
 async function updateCartItem(event) {
@@ -48,7 +47,7 @@ async function updateCartItem(event) {
 	}
 
 	cartTotalPriceElement.textContent = responseData.updatedCartData.newTotalPrice.toFixed(2);
-
+	// select badge item and update cart number
 	for (const cartBadge of cartBadgeElements) {
 		cartBadge.textContent = responseData.updatedCartData.newTotalQuantity;
 	}

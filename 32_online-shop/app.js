@@ -11,6 +11,7 @@ const createSessionConfig = require('./config/session');
 const db = require('./data/database');
 const addCsrfTokenMiddleware = require('./middlewares/csrf-token');
 const errorHandlerMiddleware = require('./middlewares/error-handler');
+const notFoundMiddleware = require('./middlewares/not-found');
 const checkAuthStatusMiddleware = require('./middlewares/check-auth');
 const protectRoutesMiddleware = require('./middlewares/protect-routes');
 const cartMiddleware = require('./middlewares/cart');
@@ -53,10 +54,10 @@ app.use(baseRoutes);
 app.use(authRoutes);
 app.use(productsRoutes);
 app.use('/cart', cartRoutes);
-// auth routes
-app.use(protectRoutesMiddleware);
-app.use('/orders', ordersRoutes);
-app.use('/admin', adminRoutes);
+app.use('/orders', protectRoutesMiddleware, ordersRoutes);
+app.use('/admin', protectRoutesMiddleware, adminRoutes);
+// invalid route
+app.use(notFoundMiddleware);
 
 // error handling
 app.use(errorHandlerMiddleware);
