@@ -29,5 +29,5 @@ module.exports = Object.freeze({
 	node: nodeServer,
 	mongo: mongoDb,
 	session: sessionConfig,
-	stripe: stripeApi
+	stripeApi: stripeApi
 });
