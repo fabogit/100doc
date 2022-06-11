@@ -32,27 +32,27 @@ async function addOrder(req, res, next){
 		return;
 	}
 
+	// clear cart session
 	req.session.cart = null;
 
 	// stripe payment
 	const session = await stripe.checkout.sessions.create({
-		line_items: [
-			{
-				price_data: {
-					currency: 'usd',
-					// TODO
-					product_data: {
-						name: 'test',
+		line_items: cart.items.map(
+			(item) => {
+				return {
+					price_data: {
+						currency: 'usd',
+						product_data: {
+							name: item.product.title,
+						},
+						unit_amount: parseFloat(item.product.price).toFixed(2) * 100,
 					},
-					// TODO
-					unit_amount_decimal: 20.99,
-				},
-				quantity: 1,
-			},
-		],
+					quantity: item.quantity,
+				};
+			}),
 		mode: 'payment',
-		success_url: `https://${node.host}:${node.port}/orders/success`,
-		cancel_url: `https://${node.host}:${node.port}/orders/failure`,
+		success_url: `http://${node.host}:${node.port}/orders/success`,
+		cancel_url: `http://${node.host}:${node.port}/orders/failure`,
 	});
 
 	res.redirect(303, session.url);
@@ -60,12 +60,12 @@ async function addOrder(req, res, next){
 	// res.redirect('/orders');
 }
 
-function getSuccess(req, res){
-	res.render('/customer/orders/success');
+function getSuccess(req, res) {
+	res.render('customer/orders/success');
 }
 
-function getFailure(req, res){
-	res.render('/customer/orders/failure');
+function getFailure(req, res) {
+	res.render('customer/orders/failure');
 }
 
 module.exports = {
