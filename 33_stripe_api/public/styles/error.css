@@ -1,0 +1,45 @@
+@keyframes cicle {
+	from {
+		color: rgba(255, 0, 0, 0.726);
+	}
+
+	to {
+		color: rgb(223, 159, 41);
+	}
+}
+
+h1 {
+	color: yellow;
+	animation-name: cicle;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate-reverse;
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+h2 {
+	animation-name: spin;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+
+#error-box {
+	max-width: 35rem;
+	/* space t/b, center r/l */
+	margin: var(--space-8) auto;
+	padding: var(--space-4);
+	background-color: var(--color-gray-600);
+	border-radius: var(--border-radius-medium);
+	/* center inline elements */
+	text-align: center;
+}

@@ -1,0 +1,18 @@
+<%- include('includes/head', { pageTitle: 'An error occurred'}) %>
+<link rel="stylesheet" href="/styles/error.css"/>
+</head>
+
+<body>
+
+  <%- include('includes/header') %>
+  <main>
+		<div id="error-box">
+			<h1>⛔ Not authenticated ⛔</h1>
+			<p>You are not authenticated!</p>
+			<p>Please log in</p>
+			<p>
+				<a class="btn" href="/">Back to safety!</a>
+			</p>
+		</div>
+  </main>
+<%- include('includes/footer') %>
