@@ -8,22 +8,32 @@
     "parserOptions": {
         "ecmaVersion": "latest"
     },
-    "rules": {
-        "indent": [
-            "error",
-            "tab"
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ]
-    }
+	"rules": {
+		"indent": [
+			"error",
+			"tab"
+		],
+		"linebreak-style": [
+			"error",
+			"unix"
+		],
+		"quotes": [
+			"error",
+			"single"
+		],
+		"semi": [
+			"error",
+			"always"
+		],
+		"eol-last": [
+			"warn",
+			"never"
+		],
+		"no-unused-vars": [
+			"warn"
+		],
+		"no-undef": [
+			"warn"
+		]
+	}
 }
