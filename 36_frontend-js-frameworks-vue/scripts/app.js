@@ -36,6 +36,10 @@ const TodosApp = {
 			this.editiedTodoId = todoId;
 			const todo = this.todos.find((todoItem) => todoItem.id === todoId);
 			this.enteredTodoText = todo.text;
+		},
+
+		deleteTodo(todoId) {
+			this.todos = this.todos.filter((todoItem) => todoItem.id !== todoId);
 		}
 	}
 };
