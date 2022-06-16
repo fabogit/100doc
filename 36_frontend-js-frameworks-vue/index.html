@@ -16,14 +16,18 @@
     </header>
     <main id="todos-app">
       <section id="todo-management">
+				<!-- @submit="methods.listenerFunction" -->
         <form @submit="saveTodo">
           <label for="text">Todo text</label>
+					<!-- v-model="someData" -->
           <input type="text" id="text" v-model="enteredTodoText" required />
           <button>Save</button>
         </form>
       </section>
       <section id="todos">
-        <ul id="todos-list">
+				<!-- v-if="boolean statement" / v-else -->
+				<p v-if="todos.length === 0">Not todos added yet - start adding some...</p>
+        <ul v-else id="todos-list">
 					<li v-for="todo in todos">
 						<p>{{ todo.text }}</p>
 						<div>
