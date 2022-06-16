@@ -1,13 +1,17 @@
 const TodosApp = {
 	data() {
 		return {
-			newTodo: 'Learn Vue.js!'
+			newTodo: 'Learn Vue.js!',
+			// two way binding
+			enteredTodoText: ''
 		};
 	},
 	methods: {
 		saveTodo(event) {
-			event.preventDefault()
-			this.newTodo = 'Updated!'
+			event.preventDefault();
+			// two way binding, <input v-model=""">
+			this.newTodo = this.enteredTodoText;
+			this.enteredTodoText = '';
 		}
 	}
 };
