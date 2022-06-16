@@ -2,9 +2,12 @@ const express = require('express');
 
 const db = require('./data/database');
 const todoRoutes = require('./routes/todos.routes');
+const enableCors = require('./middleware/cors');
 
 const app = express();
 
+// cors middleware
+app.use(enableCors);
 // allow parsing on incoming json request
 app.use(express.json());
 
