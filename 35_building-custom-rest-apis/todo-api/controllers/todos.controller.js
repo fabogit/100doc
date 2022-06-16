@@ -1,6 +1,6 @@
 const Todo = require('../models/todo.model');
 
-async function getAllTodos(request, res, next) {
+async function getAllTodos(req, res, next) {
 	let allTodos;
 	try {
 		allTodos = await Todo.getAllTodos();
