@@ -16,7 +16,7 @@
     </header>
     <main id="todos-app">
       <section id="todo-management">
-				<!-- @submit="methods.listenerFunction" -->
+				<!-- event listener on submit @submit="methods.function" -->
         <form @submit="saveTodo">
           <label for="text">Todo text</label>
 					<!-- v-model="someData" -->
@@ -31,7 +31,8 @@
 					<li v-for="todo in todos">
 						<p>{{ todo.text }}</p>
 						<div>
-							<button>Edit</button>
+							<!-- event listener on click @click="methods.function" -->
+							<button @click="startEditTodo(todo.id)">Edit</button>
 							<button>Delete</button>
 						</div>
 					</li>
