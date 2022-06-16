@@ -3,6 +3,12 @@ const TodosApp = {
 		return {
 			newTodo: 'Learn Vue.js!'
 		};
+	},
+	methods: {
+		saveTodo(event) {
+			event.preventDefault()
+			this.newTodo = 'Updated!'
+		}
 	}
 };
 
