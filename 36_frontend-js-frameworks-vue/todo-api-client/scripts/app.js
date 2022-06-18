@@ -1,6 +1,7 @@
 const TodosApp = {
 	data() {
 		return {
+			isLoading: false,
 			todos: [],
 			enteredTodoText: '',
 			editiedTodoId: null
@@ -65,6 +66,28 @@ const TodosApp = {
 		deleteTodo(todoId) {
 			this.todos = this.todos.filter((todoItem) => todoItem.id !== todoId);
 		}
+	},
+	// hook on loading
+	async created() {
+		let response;
+		this.isLoading = true;
+		try {
+			response = await fetch('http://localhost:3000/todos');
+		} catch (error) {
+			alert('Something went wrong!');
+			this.isLoading = false;
+			return;
+		}
+
+		this.isLoading = false;
+		if (!response.ok) {
+			alert('Something went wrong!');
+			return;
+		}
+
+		const responseData = await response.json();
+		// update vue data
+		this.todos = responseData.todos;
 	}
 };
 
