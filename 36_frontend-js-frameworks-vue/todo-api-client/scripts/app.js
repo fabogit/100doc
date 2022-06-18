@@ -10,19 +10,42 @@ const TodosApp = {
 	methods: {
 		async saveTodo(event) {
 			event.preventDefault();
-			// create if new/update if exist
 			if (this.editiedTodoId) {
 				const todoId = this.editiedTodoId;
+				// update DOM
 				const todoIndex = this.todos.findIndex((todoItem) => todoItem.id === todoId);
 				// override item
 				const updatedTodoItem = {
-					id: this.todos[todoIndex],
-					text: this.enteredTodoText
+					id: this.todos[todoIndex].id,
+					text: this.enteredTodoText,
 				};
 				this.todos[todoIndex] = updatedTodoItem;
 				// reset id
 				this.editiedTodoId = null;
+
+				// api request
+				let response;
+				try {
+					response = await fetch(`http://localhost:3000/todos/${todoId}`, {
+						method: 'PATCH',
+						body: JSON.stringify({
+							newText: this.enteredTodoText,
+						}),
+						headers: {
+							'Content-Type': 'application/json',
+						},
+					});
+				} catch (error) {
+					alert('Something went wrong!');
+					return;
+				}
+
+				if (!response.ok) {
+					alert('Something went wrong!');
+					return;
+				}
 			} else {
+				// create
 				let response;
 
 				try {
@@ -63,8 +86,25 @@ const TodosApp = {
 			this.enteredTodoText = todo.text;
 		},
 
-		deleteTodo(todoId) {
+		async deleteTodo(todoId) {
+			// update DOM
 			this.todos = this.todos.filter((todoItem) => todoItem.id !== todoId);
+			// api request
+			let response;
+
+			try {
+				response = await fetch(`http://localhost:3000/todos/${todoId}`, {
+					method: 'DELETE',
+				});
+			} catch (error) {
+				alert('Something went wrong!');
+				return;
+			}
+
+			if (!response.ok) {
+				alert('Something went wrong!');
+				return;
+			}
 		}
 	},
 	// hook on loading
